@@ -1,8 +1,6 @@
 :root {
     --clr-bg: #88ccf1;
     --clr-btns: #2d898b;
-    /* --clr-btns: #8c271e; */
-    /* --clr-text: #eddddd; */
     --clr-text: #000000;
 }
 
@@ -68,7 +66,7 @@ ul a {
     padding: 1em 2em;
     margin: 1.5em auto;
     background-color: var(--clr-btns);
-    /* border: 2px solid var(--clr-text); */
+    border: 2px solid var(--clr-text);
     border-radius: 3rem;
     color: var(--clr-text);
     text-decoration: none;
