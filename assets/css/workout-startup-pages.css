@@ -1,3 +1,11 @@
+:root {
+    --clr-bg: #88ccf1;
+    --clr-btns: #2d898b;
+    /* --clr-btns: #8c271e; */
+    /* --clr-text: #eddddd; */
+    --clr-text: #000000;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -7,9 +15,8 @@ html, body {
 }
 
 body {
-    
-    background-color: lightskyblue;
-    
+    background-color: var(--clr-bg);
+    font-family: 'Open Sans', sans-serif;
 }
 
 .container {
@@ -40,6 +47,7 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    font-weight: 500;
 }
 
 /* ///////// SELECTION OPTIONS //////////// */
@@ -59,10 +67,10 @@ ul a {
     width: 75%;
     padding: 1em 2em;
     margin: 1.5em auto;
-    background-color: lightblue;
-    border: 2px solid blue;
+    background-color: var(--clr-btns);
+    /* border: 2px solid var(--clr-text); */
     border-radius: 3rem;
-    color: blue;
+    color: var(--clr-text);
     text-decoration: none;
 }
 
