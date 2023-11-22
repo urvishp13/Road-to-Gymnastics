@@ -24,6 +24,7 @@ body {
 .fa-arrow-left {
     font-size: 1.75rem;
     margin: 1em 0;
+    color: black;
     cursor: pointer;
 }
 
@@ -50,7 +51,7 @@ ul {
     list-style-type: none;
 }
 
-a {
+ul a {
     display: block;
     width: 75%;
     padding: 1em 2em;
@@ -62,7 +63,7 @@ a {
     text-decoration: none;
 }
 
-a.inactive {
+Ul a.inactive {
     background-color: grey;
     border: 2px solid black;
     color: black;
