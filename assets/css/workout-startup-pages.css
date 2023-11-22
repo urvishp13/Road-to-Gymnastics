@@ -72,7 +72,7 @@ ul a {
     text-decoration: none;
 }
 
-Ul a.inactive {
+ul a.inactive {
     background-color: grey;
     border: 2px solid black;
     color: black;
