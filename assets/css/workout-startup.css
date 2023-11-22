@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    /* outline: 1px solid black; */
 }
 
 html, body {
@@ -33,6 +32,8 @@ a {
    text-align: center; 
 }
 
+/* ////////// TITLE OF PAGES ///////////// */
+
 h2 {
     position: absolute;
     top: 15%;
@@ -40,6 +41,8 @@ h2 {
     transform: translate(-50%, -50%);
     width: 100%;
 }
+
+/* ///////// SELECTION OPTIONS //////////// */
 
 ul {
     position: absolute;
