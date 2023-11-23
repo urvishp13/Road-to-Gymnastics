@@ -1,0 +1,79 @@
+:root {
+    --clr-bg: #88ccf1;
+    --clr-btns: #2d898b;
+    --clr-text: #000000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+}
+
+body {
+    background-color: var(--clr-bg);
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 80%;
+    max-width: 440px;
+    margin: 1em auto 0;
+    height: 100vh;
+}
+
+.fa-arrow-left {
+    font-size: 1.75rem;
+    margin: 1em 0;
+    color: black;
+    cursor: pointer;
+}
+
+h2, 
+a {
+   text-align: center; 
+}
+
+/* ////////// TITLE OF PAGES ///////////// */
+
+h2 {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    font-weight: 500;
+}
+
+/* ///////// SELECTION OPTIONS //////////// */
+
+ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul a {
+    display: block;
+    width: 75%;
+    padding: 1em 2em;
+    margin: 1.5em auto;
+    background-color: var(--clr-btns);
+    border: 2px solid var(--clr-text);
+    border-radius: 3rem;
+    color: var(--clr-text);
+    text-decoration: none;
+}
+
+ul a.inactive {
+    background-color: grey;
+    border: 2px solid black;
+    color: black;
+}
