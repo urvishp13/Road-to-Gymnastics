@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+    /* outline: 1px solid red; */
+    margin: 0;
+}
+
+
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+main {
+    min-height: 100%;
+}
+
+.container {
+    width: 80%;
+    max-width: 440px;
+    height: 100vh;
+    min-height: inherit;
+    margin: 0 auto;
+}
+
+.fa-arrow-left {
+    position: absolute;
+    font-size: 1.75rem;
+    margin: 1em 0;
+    color: black;
+    cursor: pointer;
+}
+
+/* /////////////// EXERCISE INFO ///////////// */
+
+.exercise-info {
+    height: inherit;
+}
+
+.video {
+    position: relative;
+    width: 100vw;
+    height: 35%;
+    left: calc(-50vw + 50%);
+    background-color: lightgrey; /* placeholder for video */
+    z-index: -1;
+}
+
+h3 {
+    margin: 1em 0 .5em;
+}
