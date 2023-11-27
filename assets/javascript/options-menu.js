@@ -30,7 +30,6 @@ for (let i = 1; i <= 3; i++) {
                 </ul>
             </div>
         </div>
-        <div class="drop-zone"></div>
     `
     exercisesList.insertAdjacentHTML("beforeend", exerciseEl)
 
@@ -54,57 +53,65 @@ for (let i = 1; i <= 3; i++) {
 
 }
 
-for (const exerciseEl of document.getElementsByClassName("exercise")) {
-    exerciseEl.addEventListener("dragstart", startDrag)
-}
+// get all the exercises from the DOM
+const exercises = document.querySelectorAll(".exercise")
 
-const dropZones = document.getElementsByClassName("drop-zone")
+// for each exercise
+exercises.forEach(exercise => {
+    // add a visual when it is started to be dragged
+    exercise.addEventListener("dragstart", function() {
+        this.classList.add("dragging")
+    })
 
-for (const dropZone of dropZones) {
-    dropZone.addEventListener("dragenter", dragEnter)
-    dropZone.addEventListener("dragover", dragOver)
-    dropZone.addEventListener("dragleave", dragLeave)
-    dropZone.addEventListener("drop", drop)
-}
+    // remove the visual when dragging it has ended
+    exercise.addEventListener("dragend", function() {
+        this.classList.remove("dragging")
+    })
+})
 
-// on the start of dragging the exercise
-function startDrag(e) {
-    e.dataTransfer.setData("text/plain", e.target.id)
-    // hide the exercise in the DOM while dragging it
-    setTimeout(function() {
-        e.target.classList.add("hide")
-    }, 0)
-}
+// make the exercisesList a valid drop zone for the dragged exercise
+exercisesList.addEventListener("dragover", function(e) {
+    e.preventDefault() // used to turn this exerciseList into a drop zone for the draggable exercises
+    
+    // take the exercise being dragged
+    const draggingExercise = document.querySelector(".dragging")
 
-// when draggable exercise enters droppable space (i.e. the space between exercises)
-function dragEnter(e) {
-    e.preventDefault() // allows one exercise to be dropped on top of another one
-    console.log(e.target)
-    e.target.classList.add("drag-over")
-}
+    // get the exercise below the mouse cursor
+    const exerciseBelow = getExerciseBelow(this, e.clientY)
+    
+    // and append the exercise being dragged above the exercise below it
+    if (exerciseBelow) {
+        this.insertBefore(draggingExercise, exerciseBelow)
+    }
+    // if no exercise below it, append the exercise being dragged to the bottom of the list
+    else {
+        this.appendChild(draggingExercise)
+    }
+        
+})
 
-// when draggable exercise is inside droppable space (i.e. the space between exercises)
-function dragOver(e) {
-    e.preventDefault() // allows one exercise to be dropped on top of another one
-    e.target.classList.add("drag-over")
-}
+// get the exercise below the dragged exercise
+function getExerciseBelow(container, yMouse) {
+    // get all the exercises in the list not being dragged
+    const undraggedExercises = [...container.querySelectorAll('.exercise:not(.dragging)')]
 
-// when draggable exercise leaves droppable space
-function dragLeave(e) {
-    e.target.classList.remove("drag-over")
-}
+    // get the exercise closest to the mouse cursor
+    return undraggedExercises.reduce((closest, undragged) => {
+        // get the dimensions of the current undragged exercise, so...
+        const undraggedRect = undragged.getBoundingClientRect()
+        // can get the distance between the midline of that exercise and our mouse
+        const distance = yMouse - undraggedRect.top - undraggedRect.height / 2
+        
+        // if the cursor is above an undragged exercise
+        if (distance < 0 && distance > closest.distance) {
+            // return that undragged exercise
+            return { distance: distance, element: undragged }
+        }
+        // else, the cursor is above nothing
+        else {
+            // so return the exercise being dragged
+            return closest
+        }
+    }, { distance: Number.NEGATIVE_INFINITY }).element
 
-// when draggable exercise is dropped
-function drop(e) {
-    e.target.classList.remove("drag-over")
-
-    // get the dragging exericse
-    const id = e.dataTransfer.getData("text/plain")
-    const dragging = document.getElementById(id)
-
-    // add it to the drop target (i.e. after the drop-zone hovering over)
-    e.target.insertAdjacentElement("afterend", dragging)
-
-    // make the dragging exercise visible again
-    dragging.classList.remove("hide")
 }
