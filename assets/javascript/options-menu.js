@@ -7,7 +7,7 @@ for (let i = 1; i <= 3; i++) {
     let exerciseEl = `
         <div id="exercise-${i}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
-            <span>Exercise ${i}</span>
+            <a href="#">Exercise ${i}</a>
             <div class="options">
                 <button
                     class="options-button"

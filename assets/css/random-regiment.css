@@ -50,9 +50,10 @@ main {
     padding: .5em .75em;
 }
 
-.exercise > span {
+.exercise > a {
     flex: 1;
     padding: .5em 0;
+    color: var(--clr-text);
 }
 
 /* /////////// BUTTONS/LINKS ///////////// */
