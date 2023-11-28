@@ -3,10 +3,13 @@
     --clr-green-lght: #99ffbd;
     --clr-green: #268426;
     --clr-orange: #ffc897;
+    --swap: #ff9900;
+    --add: red;
 }
 
 * {
     box-sizing: border-box;
+    /* outline: 1px solid red; */
 }
 
 html, body {
@@ -97,4 +100,47 @@ a.new-exercise {
 .not-selected {
     background-color: white;
     border: 2px solid var(--clr-text);
+}
+
+/* ///////////// EXERCISES LIST ////////////// */
+
+.exercise {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    left: calc(-50vw + 50%);
+    /* padding: 0 1.5em; */
+    border-top: 2px solid var(--clr-text);
+}
+
+.exercise:last-child {
+    border-bottom: 2px solid var(--clr-text);
+}
+
+.exercise-name,
+.add-exercise-button,
+.swap-exercise-button {
+    cursor: pointer;
+}
+
+.exercise-name {
+    width: 100%;
+    padding: .5em 1.5em;
+    margin: 0;
+}
+
+.add-exercise-button > i,
+.swap-exercise-button > i {
+    font-size: 1.5rem;
+    padding: .3em 1em;
+}
+
+.add-exercise-button {
+    color: var(--add);
+}
+
+.swap-exercise-button {
+    color: var(--swap)
 }

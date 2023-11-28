@@ -32,13 +32,17 @@
                 <button class="btn random">Random <i class="fa-solid fa-shuffle"></i></button>
             </div>
 
-            <div class="all-exercises">
+            <div id="all-exercises" class="all-exercises">
                 <!-- dynamically populate with exercises from API -->
+                <div class="exercise">
+                    <h3 class="exercise-name">Exercise Name</h3>
+                    <a class="add-exercise-button" href="#"><i class="fa-solid fa-plus"></i></a> <!-- link to regiment page -->
+                </div>
             </div>
         </div>
     </main>
 
-    <script src="assets/javascript/all-exercises.js"></script>
+    <script src="assets/javascript/all-exercises.js" type="module"></script>
 </body>
 
 </html>
