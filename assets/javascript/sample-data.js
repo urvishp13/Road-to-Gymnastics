@@ -1,6 +1,6 @@
 export const exercises = [
     {
-        name: "A Exercise",
+        name: "a Exercise",
         video: "",
         desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis quam quis metus auctor mollis. Praesent viverra diam elit, ac egestas urna fringilla eget. Maecenas accumsan dapibus sapien lacinia tempus. Maecenas feugiat diam vel enim lacinia, vel ornare nisl pharetra. Etiam vitae lorem quis ipsum malesuada viverra. Phasellus at augue dignissim, volutpat nunc in, maximus nunc. Nullam a justo in est placerat tempus. Aliquam vitae interdum diam, eget imperdiet turpis. Nam scelerisque erat at nibh vulputate, vel pulvinar tortor sagittis. Suspendisse sit amet molestie ligula, id efficitur massa. Integer molestie ligula nec magna congue sodales. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec tincidunt vel dolor in auctor. Sed pharetra neque id ullamcorper lacinia. Phasellus laoreet libero consectetur, auctor massa malesuada, efficitur turpis. Fusce blandit sapien vitae mollis cursus.
         
@@ -13,7 +13,7 @@ export const exercises = [
         Nam id enim sodales, tempus sem ac, vestibulum erat. Ut risus elit, vehicula nec mollis aliquam, pharetra sit amet nisl. Ut auctor id risus eu vulputate. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent dictum hendrerit commodo. Cras ligula dolor, interdum quis pellentesque a, congue a neque. Nunc ornare tempor erat, eget condimentum neque iaculis nec. Aliquam eu risus condimentum, ultrices dolor et, blandit lectus. Quisque dignissim metus nec nisi feugiat lobortis. Nulla imperdiet orci orci, eget placerat turpis fringilla in. Phasellus vel arcu euismod, feugiat nibh ac, tincidunt lacus. Aenean sodales velit ut purus congue, quis finibus augue iaculis. ringilla, interdum ultricies leo commodo. Aenean at eros eget ipsum dictum vestibulum. Morbi non sollicitudin mi.`
     },
     {
-        name: "Ab Exercise",
+        name: "b Exercise",
         video: "",
         desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis quam quis metus auctor mollis. Praesent viverra diam elit, ac egestas urna fringilla eget. Maecenas accumsan dapibus sapien lacinia tempus. Maecenas feugiat diam vel enim lacinia, vel ornare nisl pharetra. Etiam vitae lorem quis ipsum malesuada viverra. Phasellus at augue dignissim, volutpat nunc in, maximus nunc. Nullam a justo in est placerat tempus. Aliquam vitae interdum diam, eget imperdiet turpis. Nam scelerisque erat at nibh vulputate, vel pulvinar tortor sagittis. Suspendisse sit amet molestie ligula, id efficitur massa. Integer molestie ligula nec magna congue sodales. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec tincidunt vel dolor in auctor. Sed pharetra neque id ullamcorper lacinia. Phasellus laoreet libero consectetur, auctor massa malesuada, efficitur turpis. Fusce blandit sapien vitae mollis cursus.
         
@@ -39,7 +39,7 @@ export const exercises = [
         Nam id enim sodales, tempus sem ac, vestibulum erat. Ut risus elit, vehicula nec mollis aliquam, pharetra sit amet nisl. Ut auctor id risus eu vulputate. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent dictum hendrerit commodo. Cras ligula dolor, interdum quis pellentesque a, congue a neque. Nunc ornare tempor erat, eget condimentum neque iaculis nec. Aliquam eu risus condimentum, ultrices dolor et, blandit lectus. Quisque dignissim metus nec nisi feugiat lobortis. Nulla imperdiet orci orci, eget placerat turpis fringilla in. Phasellus vel arcu euismod, feugiat nibh ac, tincidunt lacus. Aenean sodales velit ut purus congue, quis finibus augue iaculis. ringilla, interdum ultricies leo commodo. Aenean at eros eget ipsum dictum vestibulum. Morbi non sollicitudin mi.`
     },
     {
-        name: "Bc Exercise",
+        name: "A Exercise",
         video: "",
         desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis quam quis metus auctor mollis. Praesent viverra diam elit, ac egestas urna fringilla eget. Maecenas accumsan dapibus sapien lacinia tempus. Maecenas feugiat diam vel enim lacinia, vel ornare nisl pharetra. Etiam vitae lorem quis ipsum malesuada viverra. Phasellus at augue dignissim, volutpat nunc in, maximus nunc. Nullam a justo in est placerat tempus. Aliquam vitae interdum diam, eget imperdiet turpis. Nam scelerisque erat at nibh vulputate, vel pulvinar tortor sagittis. Suspendisse sit amet molestie ligula, id efficitur massa. Integer molestie ligula nec magna congue sodales. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec tincidunt vel dolor in auctor. Sed pharetra neque id ullamcorper lacinia. Phasellus laoreet libero consectetur, auctor massa malesuada, efficitur turpis. Fusce blandit sapien vitae mollis cursus.
         
@@ -52,7 +52,7 @@ export const exercises = [
         Nam id enim sodales, tempus sem ac, vestibulum erat. Ut risus elit, vehicula nec mollis aliquam, pharetra sit amet nisl. Ut auctor id risus eu vulputate. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent dictum hendrerit commodo. Cras ligula dolor, interdum quis pellentesque a, congue a neque. Nunc ornare tempor erat, eget condimentum neque iaculis nec. Aliquam eu risus condimentum, ultrices dolor et, blandit lectus. Quisque dignissim metus nec nisi feugiat lobortis. Nulla imperdiet orci orci, eget placerat turpis fringilla in. Phasellus vel arcu euismod, feugiat nibh ac, tincidunt lacus. Aenean sodales velit ut purus congue, quis finibus augue iaculis. ringilla, interdum ultricies leo commodo. Aenean at eros eget ipsum dictum vestibulum. Morbi non sollicitudin mi.`
     },
     {
-        name: "1 Exercise",
+        name: "a Exercise",
         video: "",
         desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis quam quis metus auctor mollis. Praesent viverra diam elit, ac egestas urna fringilla eget. Maecenas accumsan dapibus sapien lacinia tempus. Maecenas feugiat diam vel enim lacinia, vel ornare nisl pharetra. Etiam vitae lorem quis ipsum malesuada viverra. Phasellus at augue dignissim, volutpat nunc in, maximus nunc. Nullam a justo in est placerat tempus. Aliquam vitae interdum diam, eget imperdiet turpis. Nam scelerisque erat at nibh vulputate, vel pulvinar tortor sagittis. Suspendisse sit amet molestie ligula, id efficitur massa. Integer molestie ligula nec magna congue sodales. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec tincidunt vel dolor in auctor. Sed pharetra neque id ullamcorper lacinia. Phasellus laoreet libero consectetur, auctor massa malesuada, efficitur turpis. Fusce blandit sapien vitae mollis cursus.
         

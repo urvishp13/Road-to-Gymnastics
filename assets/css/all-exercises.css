@@ -5,6 +5,7 @@
     --clr-orange: #ffc897;
     --swap: #ff9900;
     --add: red;
+    --alpha-header: #707070;
 }
 
 * {
@@ -104,18 +105,18 @@ a.new-exercise {
 
 /* ///////////// EXERCISES LIST ////////////// */
 
-.exercise {
-    display: flex;
+.exercise, .alpha-header {
     position: relative;
-    justify-content: space-between;
-    align-items: center;
     width: 100vw;
     left: calc(-50vw + 50%);
-    /* padding: 0 1.5em; */
-    border-top: 2px solid var(--clr-text);
+    padding: .5em 1.5em;
 }
 
-.exercise:last-child {
+.exercise {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid var(--clr-text);
     border-bottom: 2px solid var(--clr-text);
 }
 
@@ -127,7 +128,6 @@ a.new-exercise {
 
 .exercise-name {
     width: 100%;
-    padding: .5em 1.5em;
     margin: 0;
 }
 
@@ -143,4 +143,9 @@ a.new-exercise {
 
 .swap-exercise-button {
     color: var(--swap)
+}
+
+.alpha-header {
+    margin: 2em 0 .3em;
+    color: var(--alpha-header);
 }

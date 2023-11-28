@@ -49,22 +49,40 @@ function switchFilterSelection(selectedSoFar, wantSelected) {
 
 // sort the exercises in alphabetical order
 exercises.sort(function(curr, next) {
-    if (curr.name < next.name) {
-        return -1
-    }
-    if (curr.name > next.name) {
-        return 1
-    }
-    return 0
+    const currName = curr.name // current exercise name
+    const nextName = next.name // next exercise name
+
+    currName.localeCompare(nextName)
 })
 
+console.log(exercises)
+
+// add the letter separations to the alphabetically ordered exercise list
+// go through each exercise
+let lastLetter = ''
 exercises.forEach(exercise => {
-    exercisesHTML += `
-    <div class="exercise">
-        <h3 class="exercise-name">${exercise.name}</h3>
-        ${add} <!-- link to regiment page -->
-    </div>
+    // the HTML for each individual exercise
+    const exerciseHTML = `
+        <div class="exercise">
+            <h3 class="exercise-name">${exercise.name}</h3>
+            ${add} <!-- link to regiment page -->
+        </div>
     `
+    // analyze its first character
+    const firstChar = exercise.name.charAt(0).toLowerCase()
+    // if its the first time seeing that character
+    if (firstChar != lastLetter) {
+        // add it to the top of the exerciseHTML as a heading
+        const letterHeading = `<h4 class="alpha-header">${firstChar.toUpperCase()}</h4>`
+        exercisesHTML += letterHeading + exerciseHTML
+        // update the lastLetter in the alphabet seen to be the new one
+        lastLetter = firstChar
+    }
+    // else, add the exercise's HTML to the overall without a heading added before it
+    else {
+        exercisesHTML += exerciseHTML
+    }
+
 })
 
 // render the exercises on to the page
