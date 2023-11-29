@@ -52,7 +52,7 @@ exercises.sort(function(curr, next) {
     const currName = curr.name // current exercise name
     const nextName = next.name // next exercise name
 
-    currName.localeCompare(nextName)
+    return currName.localeCompare(nextName)
 })
 
 console.log(exercises)
@@ -64,12 +64,12 @@ exercises.forEach(exercise => {
     // the HTML for each individual exercise
     const exerciseHTML = `
         <div class="exercise">
-            <h3 class="exercise-name">${exercise.name}</h3>
+            <a class="exercise-name" href="#"><h3>${exercise.name}</h3></a>
             ${add} <!-- link to regiment page -->
         </div>
     `
     // analyze its first character
-    const firstChar = exercise.name.charAt(0).toLowerCase()
+    const firstChar = exercise.name.charAt(0).toUpperCase()
     // if its the first time seeing that character
     if (firstChar != lastLetter) {
         // add it to the top of the exerciseHTML as a heading
@@ -80,7 +80,7 @@ exercises.forEach(exercise => {
     }
     // else, add the exercise's HTML to the overall without a heading added before it
     else {
-        exercisesHTML += exerciseHTML
+        exercisesHTML += exerciseHTML + "</div>"
     }
 
 })

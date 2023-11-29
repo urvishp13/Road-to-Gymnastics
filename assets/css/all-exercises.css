@@ -109,6 +109,9 @@ a.new-exercise {
     position: relative;
     width: 100vw;
     left: calc(-50vw + 50%);
+}
+
+.exercise-name, .alpha-header {
     padding: .5em 1.5em;
 }
 
@@ -128,6 +131,11 @@ a.new-exercise {
 
 .exercise-name {
     width: 100%;
+    text-decoration: none;
+    color: var(--clr-text);
+}
+
+.exercise-name > h3 {
     margin: 0;
 }
 
