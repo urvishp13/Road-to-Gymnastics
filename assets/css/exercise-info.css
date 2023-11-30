@@ -4,8 +4,6 @@
     margin: 0;
 }
 
-
-
 html {
     height: 100%;
 }
@@ -19,11 +17,7 @@ main {
 }
 
 .container {
-    width: 80%;
-    max-width: 440px;
-    height: 100vh;
     min-height: inherit;
-    margin: 0 auto;
 }
 
 .fa-arrow-left {

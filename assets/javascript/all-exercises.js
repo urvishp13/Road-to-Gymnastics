@@ -64,7 +64,7 @@ exercises.forEach(exercise => {
     // the HTML for each individual exercise
     const exerciseHTML = `
         <div class="exercise">
-            <a class="exercise-name" href="#"><h3>${exercise.name}</h3></a>
+            <a class="exercise-name" href="add-swap.html"><h3>${exercise.name}</h3></a>
             ${add} <!-- link to regiment page -->
         </div>
     `

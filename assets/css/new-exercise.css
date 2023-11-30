@@ -1,7 +1,3 @@
-:root {
-    --clr-green-lght: #99ffbd;
-}
-
 * {
     box-sizing: border-box;
 }
@@ -46,5 +42,5 @@
 }
 
 .save {
-    background-color: var(--clr-green-lght);
+    background-color: var(--clr-new);
 }

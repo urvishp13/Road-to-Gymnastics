@@ -13,10 +13,6 @@ body {
 
 .container {
     position: relative;
-    width: 80%;
-    max-width: 440px;
-    margin: 1em auto 0;
-    height: 100vh;
 }
 
 .fa-arrow-left {
