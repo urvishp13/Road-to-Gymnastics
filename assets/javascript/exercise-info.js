@@ -9,6 +9,16 @@ const html = `
     <p class="exercise-desc">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium saepe eum soluta exercitationem amet ex velit a veniam quae 
         voluptates officia at fugit possimus, libero temporibus obcaecati sit. Ullam, eum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium saepe eum soluta exercitationem amet ex velit a veniam quae 
+        voluptates officia at fugit possimus, libero temporibus obcaecati sit. Ullam, eum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium saepe eum soluta exercitationem amet ex velit a veniam quae 
+        voluptates officia at fugit possimus, libero temporibus obcaecati sit. Ullam, eum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium saepe eum soluta exercitationem amet ex velit a veniam quae 
+        voluptates officia at fugit possimus, libero temporibus obcaecati sit. Ullam, eum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium saepe eum soluta exercitationem amet ex velit a veniam quae 
+        voluptates officia at fugit possimus, libero temporibus obcaecati sit. Ullam, eum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium saepe eum soluta exercitationem amet ex velit a veniam quae 
+        voluptates officia at fugit possimus, libero temporibus obcaecati sit. Ullam, eum.
     </p>
 `
 
