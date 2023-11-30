@@ -1,0 +1,17 @@
+:root {
+    /* workout startup pages ONLY */
+    --clr-startup-bg: #7dc8ff;
+    --clr-startup-btns: #2989c3;
+
+     /* all exercises page ONLY */
+     --clr-new: #99ffbd;
+     --clr-new-plus: #268426;
+     --clr-filter: #ffc897;
+
+    /* universal */
+    --swap: #ff9900;
+    --delete: red;
+    --add: #f66b6b;
+    --start: #47b1ff;
+    --clr-text: black;
+}

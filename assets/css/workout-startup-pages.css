@@ -1,9 +1,3 @@
-:root {
-    --clr-bg: #88ccf1;
-    --clr-btns: #2d898b;
-    --clr-text: #000000;
-}
-
 * {
     box-sizing: border-box;
 }
@@ -13,7 +7,7 @@ html, body {
 }
 
 body {
-    background-color: var(--clr-bg);
+    background-color: var(--clr-startup-bg);
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -65,15 +59,15 @@ ul a {
     width: 75%;
     padding: 1em 2em;
     margin: 1.5em auto;
-    background-color: var(--clr-btns);
-    border: 2px solid var(--clr-text);
+    background-color: var(--clr-startup-btns);
+    /* border: 2px solid var(--clr-text); */
     border-radius: 3rem;
-    color: var(--clr-text);
+    color: white;
     text-decoration: none;
 }
 
 ul a.inactive {
     background-color: grey;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     color: black;
 }
