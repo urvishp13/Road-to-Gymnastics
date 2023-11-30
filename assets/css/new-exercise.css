@@ -1,0 +1,50 @@
+:root {
+    --clr-green-lght: #99ffbd;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* /////////// NEW EXERCISE RELATED ///////////// */
+
+.new-exercise-title,
+.new-exercise-desc {
+    display: block;
+    font-size: 1rem;
+    margin: 1em 0;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;    
+}
+
+.new-exercise-desc {
+    height: 25%;
+}
+
+/* //////////// ADD/SAVE BUTTONS ////////////////// */
+
+.add-save {
+    position: relative;
+    padding: 1em 0;
+    width: 100vw;
+    height: auto;
+    left: calc(-50vw + 50%);
+    border-top: 2px solid black;
+}
+
+.save, .add {
+    display: block;
+    font-size: 1.5rem;
+    width: 80%;
+    padding: .5em .75em;
+    margin: .67em auto;
+    border: none;
+    border-radius: 3rem;
+    text-align: center;
+    color: var(--clr-text);
+    text-decoration: none;
+}
+
+.save {
+    background-color: var(--clr-green-lght);
+}
