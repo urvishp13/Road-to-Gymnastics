@@ -12,10 +12,7 @@ body {
 }
 
 .fa-arrow-left {
-    font-size: 1.75rem;
-    margin: 1em 0;
-    color: black;
-    cursor: pointer;
+    position: unset;
 }
 
 input,
@@ -73,7 +70,6 @@ a.new-exercise {
     font-size: 1.5rem;
     flex: 1 40%;
     background-color: white;
-    cursor: pointer;
 }
 
 .selected {
@@ -87,12 +83,6 @@ a.new-exercise {
 }
 
 /* ///////////// EXERCISES LIST ////////////// */
-
-.exercise, .alpha-header {
-    position: relative;
-    width: 100vw;
-    left: calc(-50vw + 50%);
-}
 
 .exercise-name, .alpha-header {
     padding: .5em 1.5em;

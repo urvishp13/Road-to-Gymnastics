@@ -19,28 +19,23 @@
 
 /* //////////// ADD/SAVE BUTTONS ////////////////// */
 
-.add-save {
-    position: relative;
+.btn-container {
     padding: 1em 0;
-    width: 100vw;
     height: auto;
-    left: calc(-50vw + 50%);
     border-top: 2px solid black;
 }
 
-.save, .add {
-    display: block;
-    font-size: 1.5rem;
+.btn.save, .btn.add {
     width: 80%;
-    padding: .5em .75em;
     margin: .67em auto;
-    border: none;
-    border-radius: 3rem;
-    text-align: center;
     color: var(--clr-text);
-    text-decoration: none;
 }
 
-.save {
+.btn.add {
+    background-color: var(--add);
+}
+
+.btn.save {
+    border: none;
     background-color: var(--clr-new);
 }

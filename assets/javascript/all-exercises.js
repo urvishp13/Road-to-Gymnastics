@@ -63,8 +63,8 @@ let lastLetter = ''
 exercises.forEach(exercise => {
     // the HTML for each individual exercise
     const exerciseHTML = `
-        <div class="exercise">
-            <a class="exercise-name" href="add-swap.html"><h3>${exercise.name}</h3></a>
+        <div class="exercise override-container">
+            <a class="exercise-name" href="add-swap-exercise.html"><h3>${exercise.name}</h3></a>
             ${add} <!-- link to regiment page -->
         </div>
     `
@@ -73,7 +73,7 @@ exercises.forEach(exercise => {
     // if its the first time seeing that character
     if (firstChar != lastLetter) {
         // add it to the top of the exerciseHTML as a heading
-        const letterHeading = `<h4 class="alpha-header">${firstChar.toUpperCase()}</h4>`
+        const letterHeading = `<h4 class="alpha-header override-container">${firstChar.toUpperCase()}</h4>`
         exercisesHTML += letterHeading + exerciseHTML
         // update the lastLetter in the alphabet seen to be the new one
         lastLetter = firstChar
