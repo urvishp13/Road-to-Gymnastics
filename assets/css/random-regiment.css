@@ -1,11 +1,3 @@
-:root {
-    --clr-text: black;
-    --swap: #ff9900;
-    --delete: red;
-    --add: #f66b6b;
-    --start: #47b1ff;
-}
-
 * {
     box-sizing: border-box;
     /* outline: 1px solid red; */
@@ -28,11 +20,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    width: 80%;
-    max-width: 440px;
     height: inherit;
     padding: 10% 0;
-    margin: 0 auto;
 }
 
 /* ////////////// EXERCISES ////////////// */
@@ -56,15 +45,7 @@ main {
     color: var(--clr-text);
 }
 
-/* /////////// BUTTONS/LINKS ///////////// */
-
-button, .add-exercise {
-    cursor: pointer;
-}
-
-a {
-    text-decoration: none;
-}
+/* /////////// BUTTONS ///////////// */
 
 .exercise button {
     font-size: 1.5rem;
@@ -72,19 +53,15 @@ a {
     background-color: white;
 }
 
-.add-exercise, .start-workout {
-    font-size: 1.5rem;
-    width: 100%;
-    padding: .5em .75em;
-    border-radius: 3rem;
+.btn.add-exercise, .btn.start-workout {
     color: var(--clr-text);
 }
 
-.add-exercise {
+.btn.add-exercise {
     background-color: var(--add);
 }
 
-.start-workout {
+.btn.start-workout {
     margin-top: auto;
     background-color: var(--start);
     border: none;

@@ -1,9 +1,3 @@
-:root {
-    --clr-text: black;
-    --add: #f66b6b;
-    --swap: #ff9900;
-}
-
 * {
     box-sizing: border-box;
 }
@@ -17,31 +11,23 @@
 
 /* /////////// PUTTING EXERCISE INTO WORKOUT BUTTON /////////////// */
 
-.add-swap {
+.btn-container {
     display: flex;
-    position: relative;
     justify-content: center;
     align-items: center;
-    width: 100vw;
     height: 15vh;
-    left: calc(-50vw + 50%);
     border-top: 2px solid black;
 }
 
-.add-swap > a {
-    font-size: 1.5rem;
+.btn {
     width: 80%;
-    padding: .5em .75em;
-    border-radius: 3rem;
-    text-align: center;
     color: var(--clr-text);
-    text-decoration: none;
 }
 
-.add {
+.btn.add {
     background-color: var(--add);
 }
 
-.swap {
+.btn.swap {
     background-color: var(--swap);
 }
