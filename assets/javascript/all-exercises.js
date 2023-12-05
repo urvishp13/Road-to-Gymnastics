@@ -10,7 +10,7 @@ let exerciseChoosen = null // to be exported for use in regiment page
 let exercisesHTML = '' // HTML to be rendered to DOM
 
 // if incoming request is to add/swap exercise, insert the add/swap icon into the exercisesHTML
-const actionIcon = ''
+const actionIcon = sessionStorage.getItem("swapORadd")
 const swap = '<a class="swap-exercise-button" href="#"><i class="fa-solid fa-right-left" data-decision="swap"></i></a>'
 const add = '<a class="add-exercise-button" href="#"><i class="fa-solid fa-plus" data-decision="add"></i></a>'
 
@@ -65,7 +65,7 @@ exercises.forEach(exercise => {
     const exerciseHTML = `
         <div class="exercise override-container">
             <a class="exercise-name" href="add-swap-exercise.html"><h3>${exercise.name}</h3></a>
-            ${add} <!-- link to regiment page -->
+            ${actionIcon === "swap" ? swap : add} <!-- link to regiment page -->
         </div>
     `
     // analyze its first character

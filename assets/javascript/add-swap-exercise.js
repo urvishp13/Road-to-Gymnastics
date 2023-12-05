@@ -12,4 +12,4 @@ const swap = `
     </a>
 `
 
-buttonDiv.innerHTML = add
+buttonDiv.innerHTML = `${sessionStorage.getItem("swapORadd") === "swap" ? swap : add}`

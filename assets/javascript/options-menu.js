@@ -18,13 +18,13 @@ for (let i = 1; i <= 3; i++) {
                 ><i class="fa-solid fa-ellipsis"></i></button>
                 <ul role="menu" id="options-menu-${i}" class="options-menu">
                     <li class="swap-exercise">
-                        <a href="#">
-                            <span><i class="fa-solid fa-right-left"></i> Change</span>
+                        <a class="swap-exercise" data-swap="swap" href="all-exercises.html">
+                            <i class="fa-solid fa-right-left"></i> Change
                         </a>
                     </li>
                     <li class="delete-exercise">
                         <a href="#">
-                            <span><i class="fa-solid fa-trash-can"></i> Delete</span>
+                            <i class="fa-solid fa-trash-can"></i> Delete
                         </a>
                     </li>
                 </ul>
@@ -115,3 +115,17 @@ function getExerciseBelow(container, yMouse) {
     }, { distance: Number.NEGATIVE_INFINITY }).element
 
 }
+
+// if the "Change exercise"/"Add exercise" is clicked
+// permiate that decision to other pages
+const addExerciseBtn = document.getElementById("add-exericse")
+const changeExerciseBtns = document.querySelectorAll(".change-exercise")
+
+document.addEventListener("click", function(e) {
+    if (e.target.dataset.swap) {
+        sessionStorage.setItem("swapORadd", "swap")
+    }
+    else if (e.target.dataset.add) {
+        sessionStorage.setItem("swapORadd", "add")
+    }
+})
