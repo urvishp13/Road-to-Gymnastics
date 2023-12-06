@@ -35,7 +35,8 @@ document.addEventListener("click", function(e) {
     // if the user decides to add/swap the exercise OR selects one exercise from the list
     else if (clickedOn.decision || e.target.offsetParent.dataset) {
         // save that exercise
-        exerciseChoosen = e.target.offsetParent // add this exercise to the regiment page
+        // exerciseChoosen = e.target.offsetParent // add this exercise to the regiment page
+        sessionStorage.setItem("exerciseAddOrSwap", e.target.offsetParent.textContent.trim())
     }
 
 })
