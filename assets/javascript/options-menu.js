@@ -1,3 +1,5 @@
+import { exercises as allExercises} from "./sample-data.js"
+
 // grab the exercises list section from DOM
 const exercisesList = document.getElementById("exercises-list")
 
@@ -7,7 +9,7 @@ for (let i = 1; i <= 3; i++) {
     let exerciseEl = `
         <div id="exercise-${i}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
-            <a href="#">Exercise ${i}</a>
+            <a href="exercise-info.html">${allExercises[i].name}</a>
             <div class="options">
                 <button
                     class="options-button"
@@ -54,10 +56,10 @@ for (let i = 1; i <= 3; i++) {
 }
 
 // get all the exercises from the DOM
-const exercises = document.querySelectorAll(".exercise")
+let exercisesInRegiment = document.querySelectorAll(".exercise")
 
 // for each exercise
-exercises.forEach(exercise => {
+exercisesInRegiment.forEach(exercise => {
     // add a visual when it is started to be dragged
     exercise.addEventListener("dragstart", function() {
         this.classList.add("dragging")
@@ -116,16 +118,18 @@ function getExerciseBelow(container, yMouse) {
 
 }
 
-// if the "Change exercise"/"Add exercise" is clicked
-// permiate that decision to other pages
-const addExerciseBtn = document.getElementById("add-exericse")
-const changeExerciseBtns = document.querySelectorAll(".change-exercise")
-
 document.addEventListener("click", function(e) {
+    // if the "Change exercise"/"Add exercise" is clicked
+        // permiate that decision to other pages
     if (e.target.dataset.swap) {
         sessionStorage.setItem("swapORadd", "swap")
     }
     else if (e.target.dataset.add) {
         sessionStorage.setItem("swapORadd", "add")
+    }
+    // if an exercise is clicked
+    else if (e.target) {
+        // save this exercise's information (i.e. name --> every exercise must have a unique name)
+        sessionStorage.setItem("exerciseWantInfoOn", e.target.textContent)
     }
 })
