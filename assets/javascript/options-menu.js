@@ -2,25 +2,10 @@ import { exercises as allExercises} from "./sample-data.js"
 
 // grab the exercises list section from DOM
 const exercisesList = document.getElementById("exercises-list")
-// const exercisesInRegimentArray = []
-
-function getExercisesRandomly() {
-    const exercisesInRegimentArray = []
-    const indeces = [] // used in the process of getting unique random numbers (and thus exercises)
-    while (exercisesInRegimentArray.length != 3) {
-        const index = Math.floor(Math.random() * allExercises.length)
-        // if this index is unique
-        if (!indeces.includes(index)) {
-            indeces.push(index)
-            exercisesInRegimentArray.push(allExercises[index])
-        }
-    }
-
-    return exercisesInRegimentArray
-}
+const exercisesInRegiment = []
 
 function renderExerciseList(exercises) {
-    return exercises.map((exercise, index) => `
+    exercisesList.innerHTML = exercises.map((exercise, index) => `
         <div id="exercise-${index+1}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
             <a href="exercise-info.html">${exercise.name}</a>
@@ -49,17 +34,7 @@ function renderExerciseList(exercises) {
     `).join("")
 }
 
-function generateRandomRegiment() {
-    // populate it with 3 exercises
-    // add a click event to each of the ellipsis to function as a more-options dropdown
-    // get the exercises in this regiment
-    const exercisesInRegiment = getExercisesRandomly()
-    // write the exercise to the DOM
-    // console.log(makeExerciseList(exercisesInRegiment))
-    exercisesList.innerHTML = renderExerciseList(exercisesInRegiment)
-
-    // grab the current exercise
-    const exercises = document.getElementsByClassName("exercise")
+function createOptionsMenuForExercises(exercises) {
 
     // grab its options menu button and the options menu itself
     for (const exercise of exercises) {
@@ -80,9 +55,9 @@ function generateRandomRegiment() {
     }
 }
 
-function makeExercisesDraggable(exercisesInRegiment) {
+function makeExercisesDraggable(exercises) {
     // for each exercise
-    exercisesInRegiment.forEach(exercise => {
+    exercises.forEach(exercise => {
         // add a visual when it is started to be dragged
         exercise.addEventListener("dragstart", function() {
             this.classList.add("dragging")
@@ -142,6 +117,31 @@ function makeExercisesDraggable(exercisesInRegiment) {
     }
 }
 
+function createUIUXForExercises() {
+    renderExerciseList(exercisesInRegiment)
+    createOptionsMenuForExercises(document.getElementsByClassName("exercise"))
+    makeExercisesDraggable(document.querySelectorAll(".exercise"))
+}
+
+function getExercisesRandomly() {
+    const indeces = [] // used in the process of getting unique random numbers (and thus exercises)
+    while (exercisesInRegiment.length != 3) {
+        const index = Math.floor(Math.random() * allExercises.length)
+        // if this index is unique
+        if (!indeces.includes(index)) {
+            indeces.push(index)
+            exercisesInRegiment.push(allExercises[index])
+        }
+    }
+
+    return exercisesInRegiment
+}
+
+function generateRandomRegiment() {
+    getExercisesRandomly() // get the exercises in this regiment
+    createUIUXForExercises()
+}
+
 document.addEventListener("click", function(e) {
     // if the "Change exercise"/"Add exercise" is clicked
         // permiate that decision to other pages
@@ -158,20 +158,20 @@ document.addEventListener("click", function(e) {
     }
 })
 
-// // when the page is redirected (reloaded) to from the all-exercises page
-// window.addEventListener("load", function() {
-//     const exercise = JSON.parse(sessionStorage.getItem("exerciseToTransfer"))
-//     const decision = sessionStorage.getItem("swapORadd")
+// when the page is redirected (reloaded) to from the all-exercises page
+window.addEventListener("load", function() {
+    const exercise = JSON.parse(sessionStorage.getItem("exerciseToTransfer"))
+    const decision = sessionStorage.getItem("swapORadd")
 
-//     // add the new exercise to the bottom of the exercise list and to the array of this regiment's exercises
-//     if (exercise && decision === "add") {
-//         exercisesInRegimentArray.push(exercise)
-//         exercisesList.appendChild(exercise)
-//         // makeExerciseList()
-//     }
+    // add the new exercise to the bottom of the exercise list and to the array of this regiment's exercises
+    if (exercise) {
+        if (decision === "add") {
+            exercisesInRegiment.push(exercise)
+            createUIUXForExercises()
+        }
+    }
 
-//     sessionStorage.clear()
-// })
+    sessionStorage.clear()
+})
 
 generateRandomRegiment()
-makeExercisesDraggable(document.querySelectorAll(".exercise"))
