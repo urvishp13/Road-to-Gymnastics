@@ -2,23 +2,37 @@ import { exercises as allExercises} from "./sample-data.js"
 
 // grab the exercises list section from DOM
 const exercisesList = document.getElementById("exercises-list")
+// const exercisesInRegimentArray = []
 
-// populate it with 3 exercises
-// add a click event to each of the ellipsis to function as a more-options dropdown
-for (let i = 1; i <= 3; i++) {
-    let exerciseEl = `
-        <div id="exercise-${i}" class="exercise" draggable="true">
+function getExercisesRandomly() {
+    const exercisesInRegimentArray = []
+    const indeces = [] // used in the process of getting unique random numbers (and thus exercises)
+    while (exercisesInRegimentArray.length != 3) {
+        const index = Math.floor(Math.random() * allExercises.length)
+        // if this index is unique
+        if (!indeces.includes(index)) {
+            indeces.push(index)
+            exercisesInRegimentArray.push(allExercises[index])
+        }
+    }
+
+    return exercisesInRegimentArray
+}
+
+function renderExerciseList(exercises) {
+    return exercises.map((exercise, index) => `
+        <div id="exercise-${index+1}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
-            <a href="exercise-info.html">${allExercises[i].name}</a>
+            <a href="exercise-info.html">${exercise.name}</a>
             <div class="options">
                 <button
                     class="options-button"
                     aria-label="options menu button"
                     aria-haspopup="menu"
-                    aria-controls="options-menu-${i}"
+                    aria-controls="options-menu-${index+1}"
                     aria-expanded="false"
                 ><i class="fa-solid fa-ellipsis"></i></button>
-                <ul role="menu" id="options-menu-${i}" class="options-menu">
+                <ul role="menu" id="options-menu-${index+1}" class="options-menu">
                     <li class="swap-exercise">
                         <a class="swap-exercise" data-swap="swap" href="all-exercises.html">
                             <i class="fa-solid fa-right-left"></i> Change
@@ -32,90 +46,100 @@ for (let i = 1; i <= 3; i++) {
                 </ul>
             </div>
         </div>
-    `
-    exercisesList.insertAdjacentHTML("beforeend", exerciseEl)
-
-    // grab the current exercise
-    exerciseEl = document.getElementById(`exercise-${i}`)
-    
-    // grab its options menu button and the options menu itself
-    const optionsBtn = exerciseEl.lastElementChild.firstElementChild
-    const optionsMenu = exerciseEl.lastElementChild.lastElementChild
-
-    // add a click event to the optionsBtn
-    optionsBtn.addEventListener("click", function(e) {
-        // open the options menu
-        this.setAttribute(
-            "aria-expanded",
-            optionsBtn.getAttribute("aria-expanded") ? "false" : "true"
-        )
-
-        optionsMenu.classList.toggle("open")
-    })
-
+    `).join("")
 }
 
-// get all the exercises from the DOM
-let exercisesInRegiment = document.querySelectorAll(".exercise")
+function generateRandomRegiment() {
+    // populate it with 3 exercises
+    // add a click event to each of the ellipsis to function as a more-options dropdown
+    // get the exercises in this regiment
+    const exercisesInRegiment = getExercisesRandomly()
+    // write the exercise to the DOM
+    // console.log(makeExerciseList(exercisesInRegiment))
+    exercisesList.innerHTML = renderExerciseList(exercisesInRegiment)
 
-// for each exercise
-exercisesInRegiment.forEach(exercise => {
-    // add a visual when it is started to be dragged
-    exercise.addEventListener("dragstart", function() {
-        this.classList.add("dragging")
+    // grab the current exercise
+    const exercises = document.getElementsByClassName("exercise")
+
+    // grab its options menu button and the options menu itself
+    for (const exercise of exercises) {
+
+        const optionsBtn = exercise.lastElementChild.firstElementChild
+        const optionsMenu = exercise.lastElementChild.lastElementChild
+
+        // add a click event to the optionsBtn
+        optionsBtn.addEventListener("click", function() {
+            // open the options menu
+            this.setAttribute(
+                "aria-expanded",
+                optionsBtn.getAttribute("aria-expanded") ? "false" : "true"
+            )
+
+            optionsMenu.classList.toggle("open")
+        })
+    }
+}
+
+function makeExercisesDraggable(exercisesInRegiment) {
+    // for each exercise
+    exercisesInRegiment.forEach(exercise => {
+        // add a visual when it is started to be dragged
+        exercise.addEventListener("dragstart", function() {
+            this.classList.add("dragging")
+        })
+
+        // remove the visual when dragging it has ended
+        exercise.addEventListener("dragend", function() {
+            this.classList.remove("dragging")
+        })
     })
 
-    // remove the visual when dragging it has ended
-    exercise.addEventListener("dragend", function() {
-        this.classList.remove("dragging")
-    })
-})
-
-// make the exercisesList a valid drop zone for the dragged exercise
-exercisesList.addEventListener("dragover", function(e) {
-    e.preventDefault() // used to turn this exerciseList into a drop zone for the draggable exercises
-    
-    // take the exercise being dragged
-    const draggingExercise = document.querySelector(".dragging")
-
-    // get the exercise below the mouse cursor
-    const exerciseBelow = getExerciseBelow(this, e.clientY)
-    
-    // and append the exercise being dragged above the exercise below it
-    if (exerciseBelow) {
-        this.insertBefore(draggingExercise, exerciseBelow)
-    }
-    // if no exercise below it, append the exercise being dragged to the bottom of the list
-    else {
-        this.appendChild(draggingExercise)
-    }
+    // make the exercisesList a valid drop zone for the dragged exercise
+    exercisesList.addEventListener("dragover", function(e) {
+        e.preventDefault() // used to turn this exerciseList into a drop zone for the draggable exercises
         
-})
+        // take the exercise being dragged
+        const draggingExercise = document.querySelector(".dragging")
 
-// get the exercise below the dragged exercise
-function getExerciseBelow(container, yMouse) {
-    // get all the exercises in the list not being dragged
-    const undraggedExercises = [...container.querySelectorAll('.exercise:not(.dragging)')]
-
-    // get the exercise closest to the mouse cursor
-    return undraggedExercises.reduce((closest, undragged) => {
-        // get the dimensions of the current undragged exercise, so...
-        const undraggedRect = undragged.getBoundingClientRect()
-        // can get the distance between the midline of that exercise and our mouse
-        const distance = yMouse - undraggedRect.top - undraggedRect.height / 2
+        // get the exercise below the mouse cursor
+        const exerciseBelow = getExerciseBelow(this, e.clientY)
         
-        // if the cursor is above an undragged exercise
-        if (distance < 0 && distance > closest.distance) {
-            // return that undragged exercise
-            return { distance: distance, element: undragged }
+        // and append the exercise being dragged above the exercise below it
+        if (exerciseBelow) {
+            this.insertBefore(draggingExercise, exerciseBelow)
         }
-        // else, the cursor is above nothing
+        // if no exercise below it, append the exercise being dragged to the bottom of the list
         else {
-            // so return the exercise being dragged
-            return closest
+            this.appendChild(draggingExercise)
         }
-    }, { distance: Number.NEGATIVE_INFINITY }).element
+            
+    })
 
+    // get the exercise below the dragged exercise
+    function getExerciseBelow(container, yMouse) {
+        // get all the exercises in the list not being dragged
+        const undraggedExercises = [...container.querySelectorAll('.exercise:not(.dragging)')]
+
+        // get the exercise closest to the mouse cursor
+        return undraggedExercises.reduce((closest, undragged) => {
+            // get the dimensions of the current undragged exercise, so...
+            const undraggedRect = undragged.getBoundingClientRect()
+            // can get the distance between the midline of that exercise and our mouse
+            const distance = yMouse - undraggedRect.top - undraggedRect.height / 2
+            
+            // if the cursor is above an undragged exercise
+            if (distance < 0 && distance > closest.distance) {
+                // return that undragged exercise
+                return { distance: distance, element: undragged }
+            }
+            // else, the cursor is above nothing
+            else {
+                // so return the exercise being dragged
+                return closest
+            }
+        }, { distance: Number.NEGATIVE_INFINITY }).element
+
+    }
 }
 
 document.addEventListener("click", function(e) {
@@ -133,3 +157,21 @@ document.addEventListener("click", function(e) {
         sessionStorage.setItem("exerciseWantInfoOn", e.target.textContent)
     }
 })
+
+// // when the page is redirected (reloaded) to from the all-exercises page
+// window.addEventListener("load", function() {
+//     const exercise = JSON.parse(sessionStorage.getItem("exerciseToTransfer"))
+//     const decision = sessionStorage.getItem("swapORadd")
+
+//     // add the new exercise to the bottom of the exercise list and to the array of this regiment's exercises
+//     if (exercise && decision === "add") {
+//         exercisesInRegimentArray.push(exercise)
+//         exercisesList.appendChild(exercise)
+//         // makeExerciseList()
+//     }
+
+//     sessionStorage.clear()
+// })
+
+generateRandomRegiment()
+makeExercisesDraggable(document.querySelectorAll(".exercise"))

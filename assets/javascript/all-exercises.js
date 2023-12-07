@@ -5,8 +5,6 @@ const all = document.querySelector(".btn.all")
 const custom = document.querySelector(".btn.custom")
 const random = document.querySelector(".btn.random")
 
-let exerciseChoosen = null // to be exported for use in regiment page
-
 let exercisesHTML = '' // HTML to be rendered to DOM
 
 // if incoming request is to add/swap exercise, insert the add/swap icon into the exercisesHTML
@@ -89,8 +87,14 @@ exercises.forEach(exercise => {
 // render the exercises on to the page
 function render() {
     document.getElementById("all-exercises").innerHTML = exercisesHTML
+    document.querySelectorAll(".exercise")
+        .forEach(exercise => exercise.addEventListener("click", function() {
+            // find the exercise that is meant to be added/swapped with
+            const transfer = exercises.find((exercise) => exercise.name === this.textContent.trim())
+            // and store it for transfer
+            sessionStorage.setItem("exerciseToTransfer", JSON.stringify(transfer))
+        })
+    )
 }
 
 render()
-
-export { exerciseChoosen }
