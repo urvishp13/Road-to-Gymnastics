@@ -26,7 +26,7 @@ function renderExerciseList(exercises) {
                 ><i class="fa-solid fa-ellipsis"></i></button>
                 <ul role="menu" id="options-menu-${index+1}" class="options-menu">
                     <li class="swap-exercise">
-                        <a class="swap-exercise" data-swap="swap" href="all-exercises.html">
+                        <a class="swap-exercise" data-swap="swap" data-exercise="${exercise.name}" href="all-exercises.html">
                             <i class="fa-solid fa-right-left"></i> Change
                         </a>
                     </li>
@@ -151,15 +151,23 @@ function generateRandomRegiment() {
     createUIUXForExercises()
 }
 
+function renderChangedRegiment() {
+    saveRegiment()
+    // recreate the exercise list
+    createUIUXForExercises()
+}
+
 function saveRegiment() {
     sessionStorage.setItem("regiment", JSON.stringify(exercisesInRegiment))
 }
 
 document.addEventListener("click", function(e) {
     // if the "Change exercise"/"Add exercise" is clicked
-        // permiate that decision to other pages
+    // permiate that decision to other pages
     if (e.target.dataset.swap) {
         sessionStorage.setItem("swapORadd", "swap")
+        // store the exercise to be swapped
+        sessionStorage.setItem("exerciseToBeSwapped", e.target.dataset.exercise)
     }
     else if (e.target.dataset.add) {
         sessionStorage.setItem("swapORadd", "add")
@@ -173,16 +181,21 @@ document.addEventListener("click", function(e) {
 
 // when the page is redirected (reloaded) to from the all-exercises page
 window.addEventListener("load", function() {
-    console.log("load event fired")
     const exerciseTransferred = JSON.parse(sessionStorage.getItem("exerciseToTransfer"))
     const decision = sessionStorage.getItem("swapORadd")
 
-    // add the new exercise to the bottom of the exercise list and to the array of this regiment's exercises
     if (exerciseTransferred) {
+        // add the new exercise to the bottom of the exercise list and to the array of this regiment's exercises
         if (decision === "add") {
+            // add this new exercise to the list of exercises in this regiment
             exercisesInRegiment.push(exerciseTransferred)
-            saveRegiment()
-            createUIUXForExercises()
+            renderChangedRegiment()
+        }
+        // replace the old exercise by adding the new exercise in its spot
+        else if (decision === "swap") {
+            const oldExercise = exercisesInRegiment.findIndex((exercise) => exercise.name === sessionStorage.getItem("exerciseToBeSwapped"))
+            exercisesInRegiment.splice(oldExercise, 1, exerciseTransferred)
+            renderChangedRegiment()
         }
     }
 })
@@ -197,7 +210,7 @@ if (!regimentAlreadyCreated) {
 // if coming back to this page
 else {
     // load the saved regiment
-    console.log("loaded saved regiment")
     exercisesInRegiment = JSON.parse(sessionStorage.getItem("regiment"))
+    // create the exercise list
     createUIUXForExercises()
 }
