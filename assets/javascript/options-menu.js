@@ -2,7 +2,14 @@ import { exercises as allExercises} from "./sample-data.js"
 
 // grab the exercises list section from DOM
 const exercisesList = document.getElementById("exercises-list")
-const exercisesInRegiment = []
+let exercisesInRegiment = []
+
+// figure out if a regiment has already been created so it doesn't get overwritten when user returns to this page after choosing which exercise
+// they want to add/swap
+let regimentAlreadyCreated = false
+if (sessionStorage.getItem("regimentAlreadyCreated")) {
+    regimentAlreadyCreated = true
+}
 
 function renderExerciseList(exercises) {
     exercisesList.innerHTML = exercises.map((exercise, index) => `
@@ -139,7 +146,13 @@ function getExercisesRandomly() {
 
 function generateRandomRegiment() {
     getExercisesRandomly() // get the exercises in this regiment
+    regimentAlreadyCreated = true
+    sessionStorage.setItem("regimentAlreadyCreated", regimentAlreadyCreated)
     createUIUXForExercises()
+}
+
+function saveRegiment() {
+    sessionStorage.setItem("regiment", JSON.stringify(exercisesInRegiment))
 }
 
 document.addEventListener("click", function(e) {
@@ -160,18 +173,31 @@ document.addEventListener("click", function(e) {
 
 // when the page is redirected (reloaded) to from the all-exercises page
 window.addEventListener("load", function() {
-    const exercise = JSON.parse(sessionStorage.getItem("exerciseToTransfer"))
+    console.log("load event fired")
+    const exerciseTransferred = JSON.parse(sessionStorage.getItem("exerciseToTransfer"))
     const decision = sessionStorage.getItem("swapORadd")
 
     // add the new exercise to the bottom of the exercise list and to the array of this regiment's exercises
-    if (exercise) {
+    if (exerciseTransferred) {
         if (decision === "add") {
-            exercisesInRegiment.push(exercise)
+            exercisesInRegiment.push(exerciseTransferred)
+            saveRegiment()
             createUIUXForExercises()
         }
     }
-
-    sessionStorage.clear()
 })
 
-generateRandomRegiment()
+// if this is first time on the regiment page
+if (!regimentAlreadyCreated) {
+    // create the regiment
+    generateRandomRegiment()
+    // save this regiment so another one doesn't get created when coming back to this page after adding/swapping exercises
+    saveRegiment()
+}
+// if coming back to this page
+else {
+    // load the saved regiment
+    console.log("loaded saved regiment")
+    exercisesInRegiment = JSON.parse(sessionStorage.getItem("regiment"))
+    createUIUXForExercises()
+}
