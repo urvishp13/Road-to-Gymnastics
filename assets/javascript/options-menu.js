@@ -26,12 +26,12 @@ function renderExerciseList(exercises) {
                 ><i class="fa-solid fa-ellipsis"></i></button>
                 <ul role="menu" id="options-menu-${index+1}" class="options-menu">
                     <li class="swap-exercise">
-                        <a class="swap-exercise" data-swap="swap" data-exercise="${exercise.name}" href="all-exercises.html">
+                        <a data-swap="${exercise.name}" href="all-exercises.html">
                             <i class="fa-solid fa-right-left"></i> Change
                         </a>
                     </li>
                     <li class="delete-exercise">
-                        <a href="#">
+                        <a data-delete="${exercise.name}" href="#">
                             <i class="fa-solid fa-trash-can"></i> Delete
                         </a>
                     </li>
@@ -167,10 +167,18 @@ document.addEventListener("click", function(e) {
     if (e.target.dataset.swap) {
         sessionStorage.setItem("swapORadd", "swap")
         // store the exercise to be swapped
-        sessionStorage.setItem("exerciseToBeSwapped", e.target.dataset.exercise)
+        sessionStorage.setItem("exerciseToBeSwapped", e.target.dataset.swap)
     }
     else if (e.target.dataset.add) {
         sessionStorage.setItem("swapORadd", "add")
+    }
+    // if deleting the exercise
+    else if (e.target.dataset.delete) {
+        // remove it from the regiment
+        const exerciseToDeleteIndex = exercisesInRegiment.findIndex((exercise) => exercise.name === e.target.dataset.delete)
+        exercisesInRegiment.splice(exerciseToDeleteIndex, 1)
+        // re-render the exercise list
+        renderChangedRegiment()
     }
     // if an exercise is clicked
     else if (e.target) {
