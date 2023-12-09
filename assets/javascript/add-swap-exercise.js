@@ -6,7 +6,7 @@ const add = `
     </a>
 `
 const swap = `
-    <a class="btn swap" href="#"> <!-- link to regiment page -->
+    <a class="btn swap" href="random-regiment.html"> <!-- link to regiment page -->
         <span><i class="fa-solid fa-right-left"></i> Swap Exercise</span>
     </a>
 `
@@ -33,5 +33,9 @@ exerciseInfo.innerHTML = html
 
 // get incoming data: if this is a swap or an add
 buttonDiv.innerHTML = `${sessionStorage.getItem("swapORadd") === "swap" ? swap : add}`
+
+document.querySelector(".btn").addEventListener("click", function() {
+    sessionStorage.setItem("exerciseToTransfer", JSON.stringify(allExercises.filter((exercise) => exercise.name === exerciseAddOrSwap)[0]))
+})
 
 sessionStorage.removeItem("exerciseAddOrSwap")

@@ -189,14 +189,13 @@ window.addEventListener("load", function() {
         if (decision === "add") {
             // add this new exercise to the list of exercises in this regiment
             exercisesInRegiment.push(exerciseTransferred)
-            renderChangedRegiment()
         }
         // replace the old exercise by adding the new exercise in its spot
         else if (decision === "swap") {
             const oldExercise = exercisesInRegiment.findIndex((exercise) => exercise.name === sessionStorage.getItem("exerciseToBeSwapped"))
             exercisesInRegiment.splice(oldExercise, 1, exerciseTransferred)
-            renderChangedRegiment()
         }
+        renderChangedRegiment()
     }
 })
 
