@@ -7,8 +7,8 @@ for (let i = 1; i <= 3; i++) {
     let exerciseEl = `
         <div id="exercise-${i}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
-            <a href="#">Exercise ${i}</a>
-            <div class="options" data-ellipsis="options">
+            <a href="#" data-click="exercise">Exercise ${i}</a>
+            <div class="options" data-click="ellipsis">
                 <button
                     class="options-button"
                     aria-label="options menu button"
@@ -42,25 +42,43 @@ for (let i = 1; i <= 3; i++) {
 
     // add a click event to the optionsBtn
     optionsBtn.addEventListener("click", function(e) {
+        // console.log(e.target.offsetParent)
         // open the options menu
-        this.setAttribute(
-            "aria-expanded",
-            optionsBtn.getAttribute("aria-expanded") ? "false" : "true"
-        )
+        // this.setAttribute(
+        //     "aria-expanded",
+        //     optionsBtn.getAttribute("aria-expanded") ? "false" : "true"
+        // )
 
-        optionsMenu.classList.toggle("open")
+        // optionsMenu.classList.add("open") // used "toggle()" rather than "add" to allow user to click the ellipsis again to hide the menu
+        // // e.target.offsetParent.setAttribute("data-ellipsis", "open")
     })
-
-    // when clicked outside of the options menu
-    document.addEventListener("click", function(e) {
-        // make the options menu disappear
-        if (!e.target.offsetParent.dataset.ellipsis) {
-            optionsMenu.classList.remove("open")
-        }
-    })
-
 
 }
+
+document.addEventListener("click", function(e) {
+    // if the ellipsis is clicked
+    if (e.target.offsetParent.dataset.click === "ellipsis") {
+        // if no option menus are open
+        if (!document.querySelector(".open")) {
+            // open this one
+            e.target.offsetParent.children[1].classList.add("open")
+            e.target.offsetParent.firstElementChild.setAttribute("aria-expanded", "true")
+        }
+        // if an options menu is already open
+        else {
+            // close it
+            document.querySelector(".open").classList.remove("open")
+            e.target.offsetParent.firstElementChild.setAttribute("aria-expanded", "false")
+        }
+        
+    }
+    // if anywhere else on the page is clicked
+    else if (e.target.offsetParent.dataset.click !== "ellipsis"){
+        // close the open menu
+        document.querySelector(".open").classList.remove("open")
+        document.querySelector("button[aria-expanded='true']").setAttribute("aria-expanded", "false")
+    }
+})
 
 // get all the exercises from the DOM
 const exercises = document.querySelectorAll(".exercise")
