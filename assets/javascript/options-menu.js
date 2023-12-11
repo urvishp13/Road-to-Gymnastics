@@ -8,7 +8,7 @@ for (let i = 1; i <= 3; i++) {
         <div id="exercise-${i}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
             <a href="#">Exercise ${i}</a>
-            <div class="options">
+            <div class="options" data-ellipsis="options">
                 <button
                     class="options-button"
                     aria-label="options menu button"
@@ -50,6 +50,15 @@ for (let i = 1; i <= 3; i++) {
 
         optionsMenu.classList.toggle("open")
     })
+
+    // when clicked outside of the options menu
+    document.addEventListener("click", function(e) {
+        // make the options menu disappear
+        if (!e.target.offsetParent.dataset.ellipsis) {
+            optionsMenu.classList.remove("open")
+        }
+    })
+
 
 }
 
