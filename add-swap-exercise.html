@@ -14,21 +14,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/utilities.css">
-    <link rel="stylesheet" href="assets/css/workout-startup-pages.css">
+    <link rel="stylesheet" href="assets/css/exercise-info.css">
+    <link rel="stylesheet" href="assets/css/add-swap-exercise.css">
 </head>
 
 <body>
     <main>
         <div class="container">
-            <a href="workout-startup-page2.html"><i class="fa-solid fa-arrow-left"></i></a> <!-- link to the 'Workouts Completed Today' page -->
-            <h2>How do you want your regiment generated?</h2>
-            <ul class="workout-startup-prompts regiment-generation">
-                <li><a href="random-regiment.html" class="btn active">Randomly <i class="fa-solid fa-shuffle"></i></a></li>
-                <li><a href="#" class="btn inactive">Customized</a></li>
-                <li><a href="#" class="btn inactive">Previously Saved</a></li>
-            </ul>
+            <a href="all-exercises.html"><i class="fa-solid fa-arrow-left"></i></a> <!-- link to the 'All exercises' page -->
+            <div id="exercise-info" class="exercise-info">
+                <!-- dynamically insert exercise info here -->
+            </div>
+
+            <div id="btn-container" class="btn-container override-container">
+                <!-- dynamically render button based on if this is an 'Add Exercise' request or 'Swap Exercise' request -->
+            </div>
         </div>
     </main>
+
+    <script src="assets/javascript/add-swap-exercise.js" type="module"></script>
 </body>
 
 </html>
