@@ -16,7 +16,7 @@ function renderExerciseList(exercises) {
         <div id="exercise-${index+1}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
             <a href="exercise-info.html">${exercise.name}</a>
-            <div class="options">
+            <div class="options" data-ellipsis="options">
                 <button
                     class="options-button"
                     aria-label="options menu button"
@@ -45,7 +45,6 @@ function createOptionsMenuForExercises(exercises) {
 
     // grab its options menu button and the options menu itself
     for (const exercise of exercises) {
-
         const optionsBtn = exercise.lastElementChild.firstElementChild
         const optionsMenu = exercise.lastElementChild.lastElementChild
 
@@ -58,6 +57,14 @@ function createOptionsMenuForExercises(exercises) {
             )
 
             optionsMenu.classList.toggle("open")
+        })
+      
+          // when clicked outside of the options menu
+        document.addEventListener("click", function(e) {
+            // make the options menu disappear
+            if (!e.target.offsetParent.dataset.ellipsis) {
+                optionsMenu.classList.remove("open")
+            }
         })
     }
 }
