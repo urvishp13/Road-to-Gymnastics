@@ -38,7 +38,6 @@ function renderExerciseList(exercises) {
                 </ul>
             </div>
         </div>
-
     `).join("")
 }
 

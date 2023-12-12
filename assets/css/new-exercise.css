@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+
+/* /////////// NEW EXERCISE RELATED ///////////// */
+
+.new-exercise-title,
+.new-exercise-desc {
+    display: block;
+    font-size: 1rem;
+    margin: 1em 0;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;    
+}
+
+.new-exercise-desc {
+    height: 25%;
+}
+
+/* //////////// ADD/SAVE BUTTONS ////////////////// */
+
+.btn-container {
+    padding: 1em 0;
+    height: auto;
+    border-top: 2px solid black;
+}
+
+.btn.save, .btn.add {
+    width: 80%;
+    margin: .67em auto;
+    color: var(--clr-text);
+}
+
+.btn.add {
+    background-color: var(--add);
+}
+
+.btn.save {
+    border: none;
+    background-color: var(--clr-new);
+}
