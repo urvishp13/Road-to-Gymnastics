@@ -8,6 +8,7 @@ html, body {
 }
 
 body {
+    position: relative;
     text-align: center;
     font-family: 'Open Sans', sans-serif;
 }
@@ -103,6 +104,18 @@ main {
 
 .delete-exercise > a {
     color: var(--delete);
+}
+
+/* ///////////// MISCELLANEOUS //////////////// */
+
+.overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 1px solid red;
 }
 
 /* ////////////// UTILITY CLASSES ////////////// */
