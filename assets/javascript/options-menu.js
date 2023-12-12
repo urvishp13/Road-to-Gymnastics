@@ -26,12 +26,12 @@ function renderExerciseList(exercises) {
                 ><i class="fa-solid fa-ellipsis"></i></button>
                 <ul role="menu" id="options-menu-${index+1}" class="options-menu">
                     <li class="swap-exercise">
-                        <a data-swap="${exercise.name}" href="all-exercises.html">
+                        <a data-click="swap" data-swap="${exercise.name}" href="all-exercises.html">
                             <i class="fa-solid fa-right-left"></i> Change
                         </a>
                     </li>
                     <li class="delete-exercise">
-                        <a data-delete="${exercise.name}" href="#">
+                        <a data-click="delete" data-delete="${exercise.name}" href="#">
                             <i class="fa-solid fa-trash-can"></i> Delete
                         </a>
                     </li>
@@ -142,32 +142,11 @@ function saveRegiment() {
 }
 
 document.addEventListener("click", function(e) {
-    // if the "Change exercise"/"Add exercise" is clicked
-    // permiate that decision to other pages
-    if (e.target.dataset.swap) {
-        sessionStorage.setItem("swapORadd", "swap")
-        // store the exercise to be swapped
-        sessionStorage.setItem("exerciseToBeSwapped", e.target.dataset.swap)
-    }
-    else if (e.target.dataset.add) {
-        sessionStorage.setItem("swapORadd", "add")
-    }
-    // if deleting the exercise
-    else if (e.target.dataset.delete) {
-        // remove it from the regiment
-        const exerciseToDeleteIndex = exercisesInRegiment.findIndex((exercise) => exercise.name === e.target.dataset.delete)
-        exercisesInRegiment.splice(exerciseToDeleteIndex, 1)
-        // re-render the exercise list
-        renderChangedRegiment()
-    }
-    // if an exercise is clicked
-    else if (e.target) {
-        // save this exercise's information (i.e. name --> every exercise must have a unique name)
-        sessionStorage.setItem("exerciseWantInfoOn", e.target.textContent)
-    }
-
     // if the ellipsis is clicked
     if (e.target.offsetParent.dataset.click === "ellipsis") {
+        // preliminary step: make the rest on the page unclickable
+        document.getElementById("overlay").style.display = "block"
+        
         // if no option menus are open
         if (!document.querySelector(".open")) {
             // open this one
@@ -180,14 +159,40 @@ document.addEventListener("click", function(e) {
             document.querySelector(".open").classList.remove("open")
             e.target.offsetParent.firstElementChild.setAttribute("aria-expanded", "false")
         }
-        
     }
-    // if anywhere else on the page is clicked AFTER having clicked on the 
+    // if anywhere else on the page is clicked AFTER having clicked on the menu
     else if (e.target.offsetParent.dataset.click !== "ellipsis" && document.querySelector(".open")){
         // close the open menu
         document.querySelector(".open").classList.remove("open")
         document.querySelector("button[aria-expanded='true']").setAttribute("aria-expanded", "false")
+        // make the rest of the page clickable again
+        document.getElementById("overlay").style.display = "none"
     }
+
+    // if the "Change exercise"/"Add exercise" is clicked
+    // permiate that decision to other pages
+    if (e.target.dataset.click === "swap") {
+        sessionStorage.setItem("swapORadd", "swap")
+        // store the exercise to be swapped
+        sessionStorage.setItem("exerciseToBeSwapped", e.target.dataset.swap)
+    }
+    else if (e.target.dataset.add) {
+        sessionStorage.setItem("swapORadd", "add")
+    }
+    // if deleting the exercise
+    else if (e.target.dataset.click === "delete") {
+        // remove it from the regiment
+        const exerciseToDeleteIndex = exercisesInRegiment.findIndex((exercise) => exercise.name === e.target.dataset.delete)
+        exercisesInRegiment.splice(exerciseToDeleteIndex, 1)
+        // re-render the exercise list
+        renderChangedRegiment()
+    }
+    // if an exercise is clicked
+    else if (e.target.dataset.click === "exercise") {
+        // save this exercise's information (i.e. name --> every exercise must have a unique name)
+        sessionStorage.setItem("exerciseWantInfoOn", e.target.textContent)
+    }
+
 })
 
 // when the page is redirected (reloaded) to from the all-exercises page

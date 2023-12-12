@@ -18,13 +18,13 @@
 </head>
 
 <body>
-    <main>
+    <main id="main">
         <div class="container">
             <div id="exercises-list"> 
                 <!-- dynamically render exercise elements -->
             </div>
 
-            <a id="add-exercise" class="btn add-exercise" data-add="add" href="all-exercises.html">
+            <a id="add-exercise" class="btn add-exercise" data-click="add" data-add="add" href="all-exercises.html">
                 <i class="fa-solid fa-circle-plus"></i> Add Exercise
             </a>
 
@@ -33,6 +33,8 @@
             </button>
         </div>
     </main>
+
+    <div id="overlay" class="overlay"></div>
 
     <script src="assets/javascript/options-menu.js" type="module"></script>
 </body>
