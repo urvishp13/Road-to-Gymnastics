@@ -15,6 +15,7 @@ body {
 
 main {
     height: 100vh;
+    overflow: hidden; /* used to hide the start-workout-prompt. want the DOM to not include the space the prompt takes up */
 }
 
 .container {
@@ -22,7 +23,7 @@ main {
     flex-direction: column;
     gap: 1em;
     height: inherit;
-    padding: 10% 0;
+    padding: 2.5em 0;
 }
 
 /* ////////////// EXERCISES ////////////// */
@@ -106,6 +107,43 @@ main {
     color: var(--delete);
 }
 
+/* ///////////// START WORKOUT PROMPT ///////// */
+
+.start-workout-prompt {
+    position: relative;
+    font-size: 1.25rem;
+    height: 30vh;
+    padding: .5em 0;
+    transform: translateY(100%);
+    background-color: var(--start);
+
+}
+
+.workout-type-options {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    margin-top: 1em;
+}
+
+.workout-type-options > * {
+    width: 100%;
+    margin: .5em auto;
+    background-color: var(--selecting-workout-type);
+    color: var(--clr-text);
+}
+
+.fa-xmark {
+    position: absolute;
+    font-size: 1.5rem;
+    top: 1em;
+    right: .2em;
+    transform: translate(-50%, -50%);
+    color: var(--delete);
+}
+
 /* ///////////// MISCELLANEOUS //////////////// */
 
 .overlay {
@@ -126,4 +164,14 @@ main {
 
 .exercise.dragging {
     opacity: 0.4;
+}
+
+.slide-up {
+    transition: transform .5s;
+    transform: translateY(-100%);
+}
+
+.slide-down {
+    transition: transform .5s;
+    transform: translateY(100%);
 }

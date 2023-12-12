@@ -4,11 +4,29 @@ import { exercises as allExercises} from "./sample-data.js"
 const exercisesList = document.getElementById("exercises-list")
 let exercisesInRegiment = []
 
+const startWorkoutBtn = document.getElementById("start-workout")
+const startWorkoutPrompt = document.getElementById("start-workout-prompt")
+
 // figure out if a regiment has already been created so it doesn't get overwritten when user returns to this page after choosing which exercise
 // they want to add/swap
 let regimentAlreadyCreated = false
 if (sessionStorage.getItem("regimentAlreadyCreated")) {
     regimentAlreadyCreated = true
+}
+
+// if this is first time on the regiment page
+if (!regimentAlreadyCreated) {
+    // create the regiment
+    generateRandomRegiment()
+    // save this regiment so another one doesn't get created when coming back to this page after adding/swapping exercises
+    saveRegiment()
+}
+// if coming back to this page
+else {
+    // load the saved regiment
+    exercisesInRegiment = JSON.parse(sessionStorage.getItem("regiment"))
+    // create the exercise list
+    createUIUXForExercises()
 }
 
 function renderExerciseList(exercises) {
@@ -192,6 +210,19 @@ document.addEventListener("click", function(e) {
         // save this exercise's information (i.e. name --> every exercise must have a unique name)
         sessionStorage.setItem("exerciseWantInfoOn", e.target.textContent)
     }
+    // if the workout is meant to start
+    else if (e.target.dataset.click === "start workout") {
+        // replace the "Start Workout" btn with the prompt for the user to select the style of their workout
+        startWorkoutBtn.style.display = "none"
+        startWorkoutPrompt.classList.remove("slide-down")
+        startWorkoutPrompt.classList.add("slide-up")
+    }
+    // if the start-workout-prompt is meant to be closed
+    else if (e.target.dataset.click === "close prompt") {
+        startWorkoutPrompt.classList.remove("slide-up")
+        startWorkoutPrompt.classList.add("slide-down")
+        startWorkoutBtn.style.display = "block"
+    }
 
 })
 
@@ -221,18 +252,3 @@ window.addEventListener("load", function() {
         renderChangedRegiment()
     }
 })
-
-// if this is first time on the regiment page
-if (!regimentAlreadyCreated) {
-    // create the regiment
-    generateRandomRegiment()
-    // save this regiment so another one doesn't get created when coming back to this page after adding/swapping exercises
-    saveRegiment()
-}
-// if coming back to this page
-else {
-    // load the saved regiment
-    exercisesInRegiment = JSON.parse(sessionStorage.getItem("regiment"))
-    // create the exercise list
-    createUIUXForExercises()
-}
