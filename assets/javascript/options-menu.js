@@ -136,6 +136,8 @@ function renderChangedRegiment() {
 }
 
 function saveRegiment() {
+    regimentAlreadyCreated = true
+    sessionStorage.setItem("regimentAlreadyCreated", regimentAlreadyCreated)
     sessionStorage.setItem("regiment", JSON.stringify(exercisesInRegiment))
 }
 
@@ -204,6 +206,13 @@ window.addEventListener("load", function() {
             const oldExercise = exercisesInRegiment.findIndex((exercise) => exercise.name === sessionStorage.getItem("exerciseToBeSwapped"))
             exercisesInRegiment.splice(oldExercise, 1, exerciseTransferred)
         }
+
+        // clear storage of any qualities no longer needed
+        sessionStorage.removeItem("exerciseAddOrSwap")
+        sessionStorage.removeItem("exerciseToTransfer")
+        sessionStorage.removeItem("exerciseWantInfoOn")
+        sessionStorage.removeItem("swapORadd")
+
         renderChangedRegiment()
     }
 })
