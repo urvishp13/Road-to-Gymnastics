@@ -15,8 +15,8 @@ function renderExerciseList(exercises) {
     exercisesList.innerHTML = exercises.map((exercise, index) => `
         <div id="exercise-${index+1}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
-            <a href="exercise-info.html">${exercise.name}</a>
-            <div class="options" data-ellipsis="options">
+            <a data-click="exercise" href="exercise-info.html">${exercise.name}</a>
+            <div class="options" data-click="ellipsis">
                 <button
                     class="options-button"
                     aria-label="options menu button"
@@ -39,34 +39,6 @@ function renderExerciseList(exercises) {
             </div>
         </div>
     `).join("")
-}
-
-function createOptionsMenuForExercises(exercises) {
-
-    // grab its options menu button and the options menu itself
-    for (const exercise of exercises) {
-        const optionsBtn = exercise.lastElementChild.firstElementChild
-        const optionsMenu = exercise.lastElementChild.lastElementChild
-
-        // add a click event to the optionsBtn
-        optionsBtn.addEventListener("click", function() {
-            // open the options menu
-            this.setAttribute(
-                "aria-expanded",
-                optionsBtn.getAttribute("aria-expanded") ? "false" : "true"
-            )
-
-            optionsMenu.classList.toggle("open")
-        })
-      
-          // when clicked outside of the options menu
-        document.addEventListener("click", function(e) {
-            // make the options menu disappear
-            if (!e.target.offsetParent.dataset.ellipsis) {
-                optionsMenu.classList.remove("open")
-            }
-        })
-    }
 }
 
 function makeExercisesDraggable(exercises) {
@@ -133,7 +105,6 @@ function makeExercisesDraggable(exercises) {
 
 function createUIUXForExercises() {
     renderExerciseList(exercisesInRegiment)
-    createOptionsMenuForExercises(document.getElementsByClassName("exercise"))
     makeExercisesDraggable(document.querySelectorAll(".exercise"))
 }
 
@@ -191,6 +162,29 @@ document.addEventListener("click", function(e) {
     else if (e.target) {
         // save this exercise's information (i.e. name --> every exercise must have a unique name)
         sessionStorage.setItem("exerciseWantInfoOn", e.target.textContent)
+    }
+
+    // if the ellipsis is clicked
+    if (e.target.offsetParent.dataset.click === "ellipsis") {
+        // if no option menus are open
+        if (!document.querySelector(".open")) {
+            // open this one
+            e.target.offsetParent.children[1].classList.add("open")
+            e.target.offsetParent.firstElementChild.setAttribute("aria-expanded", "true")
+        }
+        // if an options menu is already open
+        else {
+            // close it
+            document.querySelector(".open").classList.remove("open")
+            e.target.offsetParent.firstElementChild.setAttribute("aria-expanded", "false")
+        }
+        
+    }
+    // if anywhere else on the page is clicked AFTER having clicked on the 
+    else if (e.target.offsetParent.dataset.click !== "ellipsis" && document.querySelector(".open")){
+        // close the open menu
+        document.querySelector(".open").classList.remove("open")
+        document.querySelector("button[aria-expanded='true']").setAttribute("aria-expanded", "false")
     }
 })
 
