@@ -88,12 +88,14 @@ a.new-exercise {
     padding: .5em 1.5em;
 }
 
+.exercise, .alpha-header {
+    border-bottom: 2px solid var(--clr-text);
+}
+
 .exercise {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 2px solid var(--clr-text);
-    border-bottom: 2px solid var(--clr-text);
 }
 
 .exercise-name,
