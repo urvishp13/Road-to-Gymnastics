@@ -1,0 +1,50 @@
+:root {
+    /* workout startup pages ONLY */
+    --clr-startup-bg: #7dc8ff;
+    --clr-startup-btns: #2989c3;
+
+     /* all exercises page ONLY */
+     --clr-new: #68d689;
+     --clr-new-plus: #0c680c;
+     --clr-filter: #ffc897;
+
+    /* universal */
+    --swap: #ff9900;
+    --delete: red;
+    --add: #f66b6b;
+    --start: #47b1ff;
+    --clr-text: black;
+    --alpha-header: #707070;
+}
+
+.container {
+    width: 80%;
+    max-width: 440px;
+    margin: 0 auto;
+    height: 100vh;
+}
+
+.override-container {
+    position: relative;
+    width: 100vw;
+    left: calc(-50vw + 50%);
+}
+
+.fa-arrow-left {
+    position: absolute;
+    font-size: 1.75rem;
+    margin: 1em 0;
+    color: black;
+    cursor: pointer;
+}
+
+.btn {
+    display: block;
+    font-size: 1.5rem;
+    width: 100%;
+    padding: .5em .75em;
+    border-radius: 3rem;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}

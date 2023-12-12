@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    /* outline: 1px solid red; */
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+main {
+    min-height: 100%;
+}
+
+.container {
+    min-height: inherit;
+}
+
+/* /////////////// EXERCISE INFO ///////////// */
+
+.exercise-info {
+    height: inherit;
+}
+
+.video {
+    position: relative;
+    width: 100vw;
+    height: 35%;
+    left: calc(-50vw + 50%);
+    background-color: lightgrey; /* placeholder for video */
+    z-index: -1;
+}
+
+h3 {
+    margin: 1em 0 .5em;
+}
