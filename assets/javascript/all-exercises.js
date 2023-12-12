@@ -107,5 +107,3 @@ search.addEventListener("input", function(e) {
 })
 
 render()
-
-export { exerciseChoosen }
