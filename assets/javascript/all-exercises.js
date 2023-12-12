@@ -12,6 +12,8 @@ const actionIcon = sessionStorage.getItem("swapORadd")
 const swap = '<a class="swap-exercise-button" data-decision="swap" href="random-regiment.html"><i class="fa-solid fa-right-left"></i></a>'
 const add = '<a class="add-exercise-button" data-decision="add" href="random-regiment.html"><i class="fa-solid fa-plus"></i></a>'
 
+const search = document.getElementById("search")
+
 // save the exercise adding/swapping with
 document.addEventListener("click", function(e) {
     const clickedOn = e.target.dataset
@@ -54,8 +56,6 @@ exercises.sort(function(curr, next) {
     return currName.localeCompare(nextName)
 })
 
-console.log(exercises)
-
 // add the letter separations to the alphabetically ordered exercise list
 // go through each exercise
 let lastLetter = ''
@@ -97,4 +97,15 @@ function render() {
     )
 }
 
+search.addEventListener("input", function(e) {
+    const value = e.target.value.toLowerCase()
+    document.querySelectorAll(".exercise")
+        .forEach(exerciseEl => {
+            const isVisible = exerciseEl.textContent.trim().toLowerCase().includes(value)
+            exerciseEl.classList.toggle("hide", !isVisible)
+    })
+})
+
 render()
+
+export { exerciseChoosen }

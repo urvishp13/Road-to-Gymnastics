@@ -132,3 +132,9 @@ a.new-exercise {
     margin: 2em 0 .3em;
     color: var(--alpha-header);
 }
+
+/* /////////// UTILITY CLASSES ///////////// */
+
+.hide {
+    display: none;
+}
