@@ -7,6 +7,8 @@ let exercisesInRegiment = []
 const startWorkoutBtn = document.getElementById("start-workout")
 const startWorkoutPrompt = document.getElementById("start-workout-prompt")
 
+const supersetsSelection = document.querySelector("[data-workout-type='supersets']")
+
 // figure out if a regiment has already been created so it doesn't get overwritten when user returns to this page after choosing which exercise
 // they want to add/swap
 let regimentAlreadyCreated = false
@@ -223,6 +225,12 @@ document.addEventListener("click", function(e) {
         startWorkoutPrompt.classList.add("slide-down")
         startWorkoutBtn.style.display = "block"
     }
+
+    // if "supersets" is selected as workout type
+    if (e.target.dataset.workoutType === "supersets") {
+        sessionStorage.setItem("workoutType", "supersets")
+    }
+
 
 })
 
