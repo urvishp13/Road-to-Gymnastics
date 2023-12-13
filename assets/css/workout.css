@@ -79,3 +79,9 @@ input[type=number] {
     border-radius: .1em;
     color: white;
 }
+
+/* ////////// WHEN INTERACTING WITH APP ///////// */
+
+.previous-exercise {
+    margin-left: auto;
+}
