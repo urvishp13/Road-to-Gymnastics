@@ -42,9 +42,7 @@ const exercises = document.getElementsByClassName("exercise")
 let current = 0
 // start the workout with the reps for the first exercise to be recordable
 window.addEventListener("load", function() {
-    const firstExercise = exercises[0]
-    const input = firstExercise.lastElementChild.lastElementChild
-    input.replaceWith(form)
+    activateCurrentExercise()
 })
 
 // when current exercise is finished
@@ -56,14 +54,21 @@ form.addEventListener("submit", function(e) {
         disablePreviousExercise()
     }
 
-    // if reached the last exercise in the workout
-    
-    if (current === exercises.length)
     // make the current exercise's rep input field interactable
-    activateExercise()
+    activateCurrentExercise()
+
+    // if reached the last exercise in the workout
+    if (current === exercises.length) {
+        // replace the next button with a done button
+        const next = document.getElementById("next-exercise-btn")
+        const done = document.getElementById("finished-workout-btn")
+
+        next.style.display = "none"
+        done.style.display = "inline-block"
+    }
 })
 
-function activateExercise() {
+function activateCurrentExercise() {
     // get the next exercise in the set
     const currentExercise = exercises[current]
     // get the number of reps entered for this exercise

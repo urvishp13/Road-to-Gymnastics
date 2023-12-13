@@ -47,7 +47,6 @@ label p {
     display: inline;
     font-size: 1.1rem;
     margin: 0;
-    margin-left: auto;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -62,7 +61,9 @@ input[type=number] {
     appearance: textfield; /* remove arrows */
 }
 
-input[type=number], .next-set-btn {
+input[type=number], 
+.next-exercise-btn,
+.finished-workout-btn {
     font-size: 1.5rem;
     width: 3em;
     height: 2em; 
@@ -73,11 +74,16 @@ input[type=number] {
     text-align: center;
 }
 
-.next-set-btn {
+.next-exercise-btn,
+.finished-workout-btn {
     background-color: var(--go-to-next-exercise);
     border: none;
     border-radius: .1em;
     color: white;
+}
+
+.finished-workout-btn {
+    display: none;
 }
 
 /* ////////// WHEN INTERACTING WITH APP ///////// */
