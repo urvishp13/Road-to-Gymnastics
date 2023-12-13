@@ -15,6 +15,9 @@
     --start: #47b1ff;
     --clr-text: black;
     --alpha-header: #707070;
+
+    /* during workout action */
+    --selecting-workout-type: #afd9f7;
 }
 
 .container {
@@ -38,6 +41,10 @@
     cursor: pointer;
 }
 
+i {
+    cursor: pointer;
+}
+
 .btn {
     display: block;
     font-size: 1.5rem;
@@ -47,4 +54,8 @@
     text-decoration: none;
     text-align: center;
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
 }
