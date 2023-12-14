@@ -64,8 +64,11 @@ form.addEventListener("submit", function(e) {
         const done = document.getElementById("finished-workout-btn")
 
         next.style.display = "none"
-        done.style.display = "inline-block"
+        done.style.display = "inline"
     }
+
+    // previous rep record carries over to next exercise, so reset the field
+    form.reset()
 })
 
 function activateCurrentExercise() {
