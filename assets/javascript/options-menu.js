@@ -162,6 +162,7 @@ function saveRegiment() {
 }
 
 document.addEventListener("click", function(e) {
+    console.log(e.target)
     // if the ellipsis is clicked
     if (e.target.offsetParent.dataset.click === "ellipsis") {
         // preliminary step: make the rest on the page unclickable
@@ -230,7 +231,10 @@ document.addEventListener("click", function(e) {
     if (e.target.dataset.workoutType === "supersets") {
         sessionStorage.setItem("workoutType", "supersets")
     }
-
+    // else if, "straight sets" is selected as workout type
+    else if (e.target.dataset.workoutType === "straight sets") {
+        sessionStorage.setItem("workoutType", "straight sets")
+    }
 
 })
 

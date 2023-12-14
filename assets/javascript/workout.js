@@ -4,16 +4,16 @@ renderWorkout( JSON.parse( sessionStorage.getItem("regiment") ), sessionStorage.
 
 function renderWorkout(regiment, workoutType) {
     let workoutHTML = ""
-    // render 3 sets consisting of:
-    for (let i = 1; i <= 3; i++) { 
-        let setHTML = `
-            <div id="set-${i}" class="set set-${i}">
-                <h3>SET ${i}</h3>
-                <ul class="set-exercises">
-        `
-
-        // if supersets, 
-        if (workoutType === "supersets") {
+    // if supersets, 
+    if (workoutType === "supersets") {
+        // render 3 sets consisting of:
+        for (let i = 1; i <= 3; i++) { 
+            let setHTML = `
+                <div class="set">
+                    <h3>SET ${i}</h3>
+                    <ul class="set-exercises">
+            `
+        
             // add 1 instance of each exercise to the set
             regiment.forEach((exercise, index) => {
                 setHTML += `
@@ -27,10 +27,38 @@ function renderWorkout(regiment, workoutType) {
             })
             setHTML += "</ul></div>" // set finished
             workoutHTML += setHTML // add the set to the workout
-        }
-    } // workout completely generated
+        } 
+    }
+    else if (workoutType === "straight sets") {
+        // render as many sets as exercises in regiment
+        for (let i = 0; i < regiment.length; i++) { 
+            let setHTML = `
+                <div class="set">
+                    <h3>SET ${i+1}</h3>
+                    <ul class="set-exercises">
+            `
 
+            let exercise = regiment[i]
+            // add 3 instances of an exercise to the set
+            for (let j = 0; j < 3; j++) {
+                setHTML += `
+                    <li class="exercise">
+                        <label>${exercise.name}
+                            <input type="number" disabled>
+                        </label>
+                    </li>
+                `
+            }
+
+            setHTML += "</ul></div>" // set finished
+            workoutHTML += setHTML // add the set to the workout
+        }
+    }
+
+    // workout completely generated
     workout.innerHTML = workoutHTML
+    // don't need the type of workout anymore
+    // sessionStorage.removeItem("workoutType")
 }
 
 // get the form element from the current exercise (will be used repeatedly as we cycle through the exercises)
