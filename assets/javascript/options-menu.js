@@ -162,7 +162,6 @@ function saveRegiment() {
 }
 
 document.addEventListener("click", function(e) {
-    console.log(e.target)
     // if the ellipsis is clicked
     if (e.target.offsetParent.dataset.click === "ellipsis") {
         // preliminary step: make the rest on the page unclickable
