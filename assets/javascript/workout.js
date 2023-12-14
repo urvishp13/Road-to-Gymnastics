@@ -5,11 +5,11 @@ renderWorkout( JSON.parse( sessionStorage.getItem("regiment") ), sessionStorage.
 function renderWorkout(regiment, workoutType) {
     let workoutHTML = ""
     // render 3 sets consisting of:
-    for (let i = 1; i <= 1; i++) { 
+    for (let i = 1; i <= 3; i++) { 
         let setHTML = `
             <div id="set-${i}" class="set set-${i}">
                 <h3>SET ${i}</h3>
-                <ul class="set-exercises override-container">
+                <ul class="set-exercises">
         `
 
         // if supersets, 
@@ -25,7 +25,7 @@ function renderWorkout(regiment, workoutType) {
                 `
                 
             })
-            setHTML += "</ul>" // set finished
+            setHTML += "</ul></div>" // set finished
             workoutHTML += setHTML // add the set to the workout
         }
     } // workout completely generated

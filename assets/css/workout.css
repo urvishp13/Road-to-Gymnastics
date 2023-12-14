@@ -10,10 +10,33 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.container {
+    width: 100%;
+    height: auto;
+}
+
 /* /////////////// SET DISPLAY ///////////// */
 
 h3 {
     margin-bottom: .2em;
+    margin-left: 10%;
+}
+
+.workout {
+    height: calc(100vh - 218px);
+    overflow: hidden auto;
+    border: 2px solid red;
+    
+}
+
+.override-container {
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+.set {
+    margin: 2em 0;
+    
 }
 
 ul {
@@ -24,6 +47,7 @@ ul {
 
 .set-exercises {
     border-top: 2px solid var(--alpha-header);
+    border-bottom: 2px solid var(--alpha-header);
 }
 
 .exercise {
@@ -86,8 +110,28 @@ input[type=number] {
     display: none;
 }
 
-/* ////////// WHEN INTERACTING WITH APP ///////// */
+/* ////////// WHEN WORKING OUT ///////// */
 
 .previous-exercise {
     margin-left: auto;
+}
+
+.workout-interruptions-btns {
+    padding: 1em 0;
+    background-color: var(--start);
+}
+
+.workout-interruptions-btns > * {
+    width: 80%;
+    margin: 1em auto;
+    color: var(--clr-text);
+}
+
+.btn.rest {
+    background-color: var(--clr-new);
+}
+
+.btn.end-workout {
+    background-color: var(--delete);
+    color: white;
 }
