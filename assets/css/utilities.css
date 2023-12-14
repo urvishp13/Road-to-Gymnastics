@@ -18,6 +18,7 @@
 
     /* during workout action */
     --selecting-workout-type: #afd9f7;
+    --go-to-next-exercise: #7833a8;
 }
 
 .container {
