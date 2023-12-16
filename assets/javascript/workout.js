@@ -57,8 +57,6 @@ function renderWorkout(regiment, workoutType) {
 
     // workout completely generated
     workout.innerHTML = workoutHTML
-    // don't need the type of workout anymore
-    sessionStorage.removeItem("workoutType")
 }
 
 // get the form element from the current exercise (will be used repeatedly as we cycle through the exercises)
