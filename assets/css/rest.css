@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+}
+
+body {
+    background-color: var(--clr-startup-bg);
+}
+
+.container {
+    position: relative;
+}
+
+/* ///////////////// TIMER //////////////// */
+
+.timer {
+    display: flex;
+    position: absolute;
+    font-size: 6.5rem;
+    justify-content: center;
+    align-items: center;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10rem;
+    height: 10rem;
+    background-color: white;
+    border-radius: 50%;
+}
+
+/* ///////////// TIMER ADJUSTMENT BTNS ////////////// */
+
+.timer-adjustment-btns {
+    display: flex;
+    position: absolute;
+    justify-content: space-around;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.btn {
+    display: inline-block;
+    width: initial;
+    background-color: var(--selecting-workout-type);
+    border: 2px solid var(--change-time);
+    border-radius: 50%;
+    color: var(--change-time);
+}
+
+.btn.stop {
+    padding: .5em .6em;
+    background-color: var(--stop-time);
+    border-color: var(--stop-time-text);
+    color: var(--stop-time-text);
+}

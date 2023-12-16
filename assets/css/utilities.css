@@ -19,6 +19,11 @@
     /* during workout action */
     --selecting-workout-type: #afd9f7;
     --go-to-next-exercise: #7833a8;
+
+    /* rest page */
+    --change-time: #1548c1;
+    --stop-time: #e2cece;
+    --stop-time-text: #b00;
 }
 
 .container {
