@@ -98,7 +98,18 @@ function render() {
 }
 
 search.addEventListener("input", function(e) {
+    // get the typed query
     const value = e.target.value.toLowerCase()
+    
+    // if ANY query exists
+    value 
+    // remove the alphabet letter headings from the list of exercise
+    ? document.querySelectorAll(".alpha-header")
+        .forEach(header => header.classList.add("hide"))
+    // else, if no query, put the alphabet letter headings back into the list
+    : document.querySelectorAll(".alpha-header")
+        .forEach(header => header.classList.remove("hide")) 
+
     document.querySelectorAll(".exercise")
         .forEach(exerciseEl => {
             const isVisible = exerciseEl.textContent.trim().toLowerCase().includes(value)
