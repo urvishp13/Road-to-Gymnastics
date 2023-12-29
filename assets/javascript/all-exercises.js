@@ -62,26 +62,32 @@ let lastLetter = ''
 exercises.forEach(exercise => {
     // the HTML for each individual exercise
     const exerciseHTML = `
-        <div class="exercise override-container" data-add-swap="true">
+        <div class="exercise" data-add-swap="true">
             <a class="exercise-name" href="add-swap-exercise.html"><h3>${exercise.name}</h3></a>
             ${actionIcon === "swap" ? swap : add} <!-- link to regiment page -->
         </div>
     `
-    // analyze its first character
+    // analyze the exercise's first character
     const firstChar = exercise.name.charAt(0).toUpperCase()
     // if its the first time seeing that character
     if (firstChar != lastLetter) {
-        // add it to the top of the exerciseHTML as a heading
-        const letterHeading = `<h4 class="alpha-header override-container">${firstChar.toUpperCase()}</h4>`
-        exercisesHTML += letterHeading + exerciseHTML
+        // AND if already passed the first character of the alphabet ("A")
+        if (firstChar !== "A") {
+            // close the previous div.alpha-grouping
+            exercisesHTML += "</div>"
+        }
+
+        // add the character to the overall exercisesHTML markup as a header
+        exercisesHTML += `
+            <div class="alpha-grouping">
+                <h4 class="alpha-header">${firstChar.toUpperCase()}</h4>
+        `
         // update the lastLetter in the alphabet seen to be the new one
         lastLetter = firstChar
     }
-    // else, add the exercise's HTML to the overall without a heading added before it
-    else {
-        exercisesHTML += exerciseHTML + "</div>"
-    }
-
+    
+    // add the current exercise to the total exercisesHTML markup
+    exercisesHTML += exerciseHTML
 })
 
 // render the exercises on to the page
@@ -98,7 +104,18 @@ function render() {
 }
 
 search.addEventListener("input", function(e) {
+    // get the typed query
     const value = e.target.value.toLowerCase()
+    
+    // if ANY query exists
+    value 
+    // remove the alphabet letter headings from the list of exercise
+    ? document.querySelectorAll(".alpha-header")
+        .forEach(header => header.classList.add("hide"))
+    // else, if no query, put the alphabet letter headings back into the list
+    : document.querySelectorAll(".alpha-header")
+        .forEach(header => header.classList.remove("hide")) 
+
     document.querySelectorAll(".exercise")
         .forEach(exerciseEl => {
             const isVisible = exerciseEl.textContent.trim().toLowerCase().includes(value)
