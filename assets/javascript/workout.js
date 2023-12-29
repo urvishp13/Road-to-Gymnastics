@@ -1,5 +1,6 @@
 // render the workout to the page based on the type of workout this is i.e. supersets or straight sets
 const workout = document.getElementById("workout")
+const repsTracker = []
 renderWorkout( JSON.parse( sessionStorage.getItem("regiment") ), sessionStorage.getItem("workoutType") )
 
 function renderWorkout(regiment, workoutType) {
@@ -111,6 +112,10 @@ function activateCurrentExercise() {
 function disablePreviousExercise() {
     const inputField = form.children[1]
     const repsDone = inputField.value
+
+    repsTracker.push(repsDone)
+    sessionStorage.setItem( "completedWorkout", JSON.stringify(repsTracker) )
+
     const wrapper = document.createElement("div")
     wrapper.classList.add("previous-exercise")
     wrapper.innerHTML = `<input type="number" value="${repsDone}" disabled> reps`

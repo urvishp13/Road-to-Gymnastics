@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    width: unset;
+    /* border: 1px solid red; */
+}
+
+/* //////////// TOP SECTION ///////////// */
+
+.top {
+    text-align: center;
+    background-color: var(--clr-startup-bg);
+}
+
+.top > h2 {
+    margin: 0;
+    padding: 2.5em 0;
+}
+
+/* /////////// BOTTOM SECTION /////////// */
+
+.bottom {
+    width: 100%;
+    padding: 3em 0;
+    background-color: var(--clr-startup-bg);
+}
+
+/* ///////////// WORKOUT SUMMARY //////////// */
+
+.workout-summary-wrapper {
+    height: calc(100vh - 153px - 96px);
+    padding: 1em 1.5em;
+    overflow-y: scroll;
+}
+
+.set {
+    margin: 1em 0;
+    text-align: center;
+    border: 2px solid var(--clr-text);
+}
