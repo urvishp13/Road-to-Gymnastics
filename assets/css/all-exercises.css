@@ -11,6 +11,10 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.container {
+    height: auto;
+}
+
 .fa-arrow-left {
     position: unset;
 }
@@ -83,6 +87,11 @@ a.new-exercise {
 }
 
 /* ///////////// EXERCISES LIST ////////////// */
+
+.all-exercises {
+    max-width: 440px;
+    margin: 0 auto;
+}
 
 .exercise-name, .alpha-header {
     padding: .5em 1.5em;
