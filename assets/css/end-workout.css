@@ -44,7 +44,75 @@ body {
 }
 
 .set {
-    margin: 1.5em 0;
+    font-size: 1.25rem;
+    margin: 1em 0;
+    padding: 1em 0;
+    font-weight: 500;
     text-align: center;
     border: 2px solid var(--clr-text);
+    cursor: pointer;
+}
+
+/* //////////// SET SUMMARY //////////////// */
+
+.modal {
+    width: 80%;
+    max-width: 350px;
+    border: 2px solid var(--clr-text);
+}
+
+.close-modal-btn {
+    float: right;
+}
+
+.set-title {
+    font-size: 1.25rem;
+}
+
+.set-exercises {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border-top: 2px solid var(--clr-text);
+}
+
+.exercise {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    margin: 1em 0;
+}
+
+label {
+    width: 150px;
+    margin-right: .5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* remove arrows */
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    appearance: textfield; /* remove arrows */
+}
+
+input[type=number], 
+.next-exercise-btn,
+.finished-workout-btn {
+    font-size: 1.5rem;
+    width: 3em;
+    height: 2em; 
+}
+
+input[type=number] {
+    margin-left: auto;
+    margin-right: .25em;
+    text-align: center;
 }
