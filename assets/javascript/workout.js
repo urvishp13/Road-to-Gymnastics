@@ -74,18 +74,27 @@ window.addEventListener("load", function() {
 // when current exercise is finished
 form.addEventListener("submit", function(e) {
     e.preventDefault() // prevent the form from resetting
-    
+
     // if not the first exercise in the workout
     if (current > 0) {
         disablePreviousExercise()
     }
 
-    // make the current exercise's rep input field interactable
-    activateCurrentExercise()
+    // if on the last exercise
+    if (current === exercises.length) {
+        // do not propagate form down the workout list anymore
+        return
+    }
+
+    // if not the last exercise in the workout
+    if (current < exercises.length) {
+        // make the current exercise's rep input field interactable
+        activateCurrentExercise()
+    }
 
     // if reached the last exercise in the workout
     if (current === exercises.length) {
-        // replace the next button with a done button
+        // replace the "next" button with a "done" button
         const next = document.getElementById("next-exercise-btn")
         const done = document.getElementById("finished-workout-btn")
 
@@ -98,13 +107,13 @@ form.addEventListener("submit", function(e) {
 })
 
 function activateCurrentExercise() {
-    // get the next exercise in the set
+    // get the current exercise in the set
     const currentExercise = exercises[current]
-    // get the number of reps entered for this exercise
+    // get the input field for this exercise
     const input = currentExercise.lastElementChild.lastElementChild
-    // move the form to the next exercise and make input un-disabled
+    // move the form to the current exercise and make its input un-disabled
     input.replaceWith(form)
-    // move on to the next exercise
+    // prep for activating the next exercise
     current++
 }
 
@@ -116,6 +125,7 @@ function disablePreviousExercise() {
     repsTracker.push(repsDone)
     sessionStorage.setItem( "completedWorkout", JSON.stringify(repsTracker) )
 
+    // disable the previous exercise's input element
     const wrapper = document.createElement("div")
     wrapper.classList.add("previous-exercise")
     wrapper.innerHTML = `<input type="number" value="${repsDone}" disabled> reps`
