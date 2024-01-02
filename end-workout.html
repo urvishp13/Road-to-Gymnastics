@@ -14,29 +14,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/utilities.css">
-    <link rel="stylesheet" href="assets/css/workout.css">
+    <link rel="stylesheet" href="assets/css/end-workout.css">
 </head>
 
 <body>
-    <main class="container">
-        <div id="workout" class="workout">
-            <!-- render sets dynamically -->
-        </div>
+    <main>
+        <div class="container">
+            <div class="top">
+                <h2>Workout Completed</h2>
+            </div>
 
-        <div class="workout-interruptions-btns">
-            <a id="rest" class="btn rest" href="rest.html">REST</a>
-            <a id="end-workout" class="btn end-workout" href="end-workout.html">END WORKOUT</a>
+            <div class="workout-summary-wrapper">
+                <h3>Workout Summary</h3>
+                <div id="summary" class="summary">
+                    <!-- dynamically generate workout summary -->
+                </div>
+            </div>
+            
+            <div class="bottom"></div>
         </div>
     </main>
 
-    <form id="on-current-exercise" autocomplete="off">
-        <p>reps</p>
-        <input type="number" min="0" id="exercise-reps" required>
-        <button id="next-exercise-btn" class="next-exercise-btn">NEXT</button>
-        <button id="finished-workout-btn" class="finished-workout-btn">DONE</button>
-    </form>
+    <dialog id="modal" class="modal"></dialog>
 
-    <script src="assets/javascript/workout.js"></script>
+    <script src="assets/javascript/end-workout.js"></script>
 </body>
 
 </html>

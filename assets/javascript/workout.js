@@ -1,5 +1,7 @@
 // render the workout to the page based on the type of workout this is i.e. supersets or straight sets
 const workout = document.getElementById("workout")
+// create a filler, repetitions-done tracker for all the exercises
+let repsTracker = []
 renderWorkout( JSON.parse( sessionStorage.getItem("regiment") ), sessionStorage.getItem("workoutType") )
 
 function renderWorkout(regiment, workoutType) {
@@ -27,7 +29,7 @@ function renderWorkout(regiment, workoutType) {
             })
             setHTML += "</ul></div>" // set finished
             workoutHTML += setHTML // add the set to the workout
-        } 
+        }
     }
     else if (workoutType === "straight sets") {
         // render as many sets as exercises in regiment
@@ -57,6 +59,13 @@ function renderWorkout(regiment, workoutType) {
 
     // workout completely generated
     workout.innerHTML = workoutHTML
+
+    // populated repsTracker with as many 0s as exercises
+    for (let i = 0; i < 3 * regiment.length; i++) {
+        repsTracker.push(0)
+    }
+
+    sessionStorage.setItem( "workout", JSON.stringify(repsTracker) )
 }
 
 // get the form element from the current exercise (will be used repeatedly as we cycle through the exercises)
@@ -73,18 +82,27 @@ window.addEventListener("load", function() {
 // when current exercise is finished
 form.addEventListener("submit", function(e) {
     e.preventDefault() // prevent the form from resetting
-    
+
     // if not the first exercise in the workout
     if (current > 0) {
-        disablePreviousExercise()
+        disablePreviousExercise(current-1)
     }
 
-    // make the current exercise's rep input field interactable
-    activateCurrentExercise()
+    // if on the last exercise
+    if (current === exercises.length) {
+        // do not propagate form down the workout list anymore
+        return
+    }
+
+    // if not the last exercise in the workout
+    if (current < exercises.length) {
+        // make the current exercise's rep input field interactable
+        activateCurrentExercise()
+    }
 
     // if reached the last exercise in the workout
     if (current === exercises.length) {
-        // replace the next button with a done button
+        // replace the "next" button with a "done" button
         const next = document.getElementById("next-exercise-btn")
         const done = document.getElementById("finished-workout-btn")
 
@@ -97,20 +115,28 @@ form.addEventListener("submit", function(e) {
 })
 
 function activateCurrentExercise() {
-    // get the next exercise in the set
+    // get the current exercise in the set
     const currentExercise = exercises[current]
-    // get the number of reps entered for this exercise
+    // get the input field for this exercise
     const input = currentExercise.lastElementChild.lastElementChild
-    // move the form to the next exercise and make input un-disabled
+    // move the form to the current exercise and make its input un-disabled
     input.replaceWith(form)
-    // move on to the next exercise
+    // prep for activating the next exercise
     current++
 }
 
 // remove the ability to interact with the previous exercise: alter the display to: "(rep number) reps" and make input field disabled
-function disablePreviousExercise() {
+function disablePreviousExercise(exercise) {
     const inputField = form.children[1]
     const repsDone = inputField.value
+
+    // changes the 0 reps for the exercise to the inputted (completed reps) value
+    repsTracker = repsTracker.map((rep, index) => {
+        return index === exercise ? repsDone : rep
+    })
+    sessionStorage.setItem( "workout", JSON.stringify(repsTracker) )
+
+    // disable the previous exercise's input element
     const wrapper = document.createElement("div")
     wrapper.classList.add("previous-exercise")
     wrapper.innerHTML = `<input type="number" value="${repsDone}" disabled> reps`
