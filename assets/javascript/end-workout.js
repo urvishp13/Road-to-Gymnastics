@@ -1,7 +1,7 @@
 // get the type of workout completed
 const workoutType = sessionStorage.getItem("workoutType")
 // get the reps completed during the workout
-const repsCompleted = JSON.parse(sessionStorage.getItem("completedWorkout"))
+const repsCompleted = JSON.parse(sessionStorage.getItem("workout"))
 // get the exercises in the workout
 const regiment = JSON.parse(sessionStorage.getItem("regiment"))
 // get the DOM element to place the workout summary in
@@ -38,7 +38,7 @@ document.addEventListener("click", function(e) {
 
         // FOR SUPERSETS
         // go through the repsCompleted array 1-by-1
-        // each set starts at (multiples of numbers of exercises)
+        // each set starts at multiples of number of exercises
         if (workoutType === "supersets") {
             // get the set from the repsDone array
             const setReps = repsCompleted.slice((setNumber - 1) * (regiment.length), setNumber * (regiment.length)) 

@@ -1,6 +1,7 @@
 // render the workout to the page based on the type of workout this is i.e. supersets or straight sets
 const workout = document.getElementById("workout")
-const repsTracker = []
+// create a filler, repetitions-done tracker for all the exercises
+let repsTracker = []
 renderWorkout( JSON.parse( sessionStorage.getItem("regiment") ), sessionStorage.getItem("workoutType") )
 
 function renderWorkout(regiment, workoutType) {
@@ -28,7 +29,7 @@ function renderWorkout(regiment, workoutType) {
             })
             setHTML += "</ul></div>" // set finished
             workoutHTML += setHTML // add the set to the workout
-        } 
+        }
     }
     else if (workoutType === "straight sets") {
         // render as many sets as exercises in regiment
@@ -58,6 +59,13 @@ function renderWorkout(regiment, workoutType) {
 
     // workout completely generated
     workout.innerHTML = workoutHTML
+
+    // populated repsTracker with as many 0s as exercises
+    for (let i = 0; i < 3 * regiment.length; i++) {
+        repsTracker.push(0)
+    }
+
+    sessionStorage.setItem( "workout", JSON.stringify(repsTracker) )
 }
 
 // get the form element from the current exercise (will be used repeatedly as we cycle through the exercises)
@@ -77,7 +85,7 @@ form.addEventListener("submit", function(e) {
 
     // if not the first exercise in the workout
     if (current > 0) {
-        disablePreviousExercise()
+        disablePreviousExercise(current-1)
     }
 
     // if on the last exercise
@@ -118,12 +126,15 @@ function activateCurrentExercise() {
 }
 
 // remove the ability to interact with the previous exercise: alter the display to: "(rep number) reps" and make input field disabled
-function disablePreviousExercise() {
+function disablePreviousExercise(exercise) {
     const inputField = form.children[1]
     const repsDone = inputField.value
 
-    repsTracker.push(repsDone)
-    sessionStorage.setItem( "completedWorkout", JSON.stringify(repsTracker) )
+    // changes the 0 reps for the exercise to the inputted (completed reps) value
+    repsTracker = repsTracker.map((rep, index) => {
+        return index === exercise ? repsDone : rep
+    })
+    sessionStorage.setItem( "workout", JSON.stringify(repsTracker) )
 
     // disable the previous exercise's input element
     const wrapper = document.createElement("div")
