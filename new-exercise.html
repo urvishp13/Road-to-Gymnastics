@@ -25,12 +25,12 @@
             
             <div class="exercise-info">
                 <div class="video"></div>
-                <input class="exercise-title new-exercise-title" type="text" placeholder="Name of exercise...">
-                <textarea class="exercise-desc new-exercise-desc" placeholder="Description of exercise..."></textarea>
+                <input id="new-exercise-title" class="exercise-title new-exercise-title" type="text" placeholder="Name of exercise...">
+                <textarea id="new-exercise-desc" class="exercise-desc new-exercise-desc" placeholder="Description of exercise..."></textarea>
             </div>
 
             <div class="btn-container override-container">
-                <button class="btn save">
+                <button id="save-btn" class="btn save">
                     <span><i class="fa-solid fa-floppy-disk"></i> Save</span>
                 </button>
                 <a class="btn add" href="#"> <!-- link to regiment page -->
@@ -40,6 +40,8 @@
         </div>
     </main>
 
+    <script src="assets/javascript/new-exercise.js"></script>
+    <script src="dist/bundle.js" type="module"></script>
 </body>
 
 </html>

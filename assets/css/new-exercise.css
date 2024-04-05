@@ -3,6 +3,9 @@
 }
 
 /* /////////// NEW EXERCISE RELATED ///////////// */
+.exercise-info {
+    /* height: auto; */
+}
 
 .new-exercise-title,
 .new-exercise-desc {
