@@ -22,21 +22,35 @@
     <main>
         <div class="container">
             <a href="all-exercises.html"><i class="fa-solid fa-arrow-left"></i></a> <!-- link to the 'All exercises' page -->
-            
-            <div class="exercise-info">
-                <div class="video"></div>
-                <input id="new-exercise-title" class="exercise-title new-exercise-title" type="text" placeholder="Name of exercise...">
-                <textarea id="new-exercise-desc" class="exercise-desc new-exercise-desc" placeholder="Description of exercise..."></textarea>
-            </div>
 
-            <div class="btn-container override-container">
-                <button id="save-btn" class="btn save">
-                    <span><i class="fa-solid fa-floppy-disk"></i> Save</span>
-                </button>
-                <a class="btn add" href="#"> <!-- link to regiment page -->
-                    <span><i class="fa-solid fa-circle-plus"></i> Add to Workout</span>
-                </a>
-            </div>
+            <form id="exercise-form" class="exercise-info">
+                <!-- GIF demonstrating exercise -->
+                <div class="video"></div>
+
+                <!-- title of exercise -->
+                <div id="new-exercise-title-placeholder" class="new-exercise-title-placeholder">
+                    <input id="new-exercise-title" class="exercise-title new-exercise-title" type="text" placeholder="Name of exercise...">
+                </div>
+
+                <!-- description of exercise -->
+                <div id="new-exercise-desc-placeholder" class="new-exercise-desc-placeholder">
+                    <textarea id="new-exercise-desc" class="exercise-desc new-exercise-desc" placeholder="Description of exercise..."></textarea>
+                </div>
+
+                <!-- buttons -->
+                <div class="btn-container override-container">
+                    <button id="save-btn" class="btn save">
+                        <span><i class="fa-solid fa-floppy-disk"></i> Save</span>
+                    </button>
+                    <a class="btn add" href="#"> <!-- link to regiment page -->
+                        <span><i class="fa-solid fa-circle-plus"></i> Add to Workout</span>
+                    </a>
+                </div>
+            </form>
+
+            <!-- dynamically paste data from form here -->
+            <div id="exercise"></div>
+
         </div>
     </main>
 

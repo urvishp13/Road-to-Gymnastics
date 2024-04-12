@@ -16,12 +16,3 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 
-const exerciseTitle = document.getElementById("new-exercise-title")
-const exerciseDesc = document.getElementById("new-exercise-desc")
-const saveExerciseBtn = document.getElementById("save-btn")
-
-saveExerciseBtn.addEventListener("click", writeExerciseToPage)
-
-function writeExerciseToPage() {
-  exerciseTitle = exerciseTitle.value
-}

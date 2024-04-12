@@ -7,6 +7,10 @@
     /* height: auto; */
 }
 
+.new-exercise-desc-placeholder {
+    height: 25%;
+}
+
 .new-exercise-title,
 .new-exercise-desc {
     display: block;
@@ -17,7 +21,7 @@
 }
 
 .new-exercise-desc {
-    height: 25%;
+    height: 90%;
 }
 
 /* //////////// ADD/SAVE BUTTONS ////////////////// */
