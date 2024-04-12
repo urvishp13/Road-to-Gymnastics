@@ -35,7 +35,7 @@ function renderExerciseList(exercises) {
     exercisesList.innerHTML = exercises.map((exercise, index) => `
         <div id="exercise-${index+1}" class="exercise" draggable="true">
             <button class="move-exercise"><i class="fa-solid fa-up-down"></i></button>
-            <a data-click="exercise" href="exercise-info.html">${exercise.name}</a>
+            <a data-click="exercise" href="exercise-info.html">${exercise.title}</a>
             <div class="options" data-click="ellipsis">
                 <button
                     class="options-button"
@@ -46,12 +46,12 @@ function renderExerciseList(exercises) {
                 ><i class="fa-solid fa-ellipsis"></i></button>
                 <ul role="menu" id="options-menu-${index+1}" class="options-menu">
                     <li class="swap-exercise">
-                        <a data-click="swap" data-swap="${exercise.name}" href="all-exercises.html">
+                        <a data-click="swap" data-swap="${exercise.title}" href="all-exercises.html">
                             <i class="fa-solid fa-right-left"></i> Change
                         </a>
                     </li>
                     <li class="delete-exercise">
-                        <a data-click="delete" data-delete="${exercise.name}" href="#">
+                        <a data-click="delete" data-delete="${exercise.title}" href="#">
                             <i class="fa-solid fa-trash-can"></i> Delete
                         </a>
                     </li>
@@ -202,7 +202,7 @@ document.addEventListener("click", function(e) {
     // if deleting the exercise
     else if (e.target.dataset.click === "delete") {
         // remove it from the regiment
-        const exerciseToDeleteIndex = exercisesInRegiment.findIndex((exercise) => exercise.name === e.target.dataset.delete)
+        const exerciseToDeleteIndex = exercisesInRegiment.findIndex((exercise) => exercise.title === e.target.dataset.delete)
         exercisesInRegiment.splice(exerciseToDeleteIndex, 1)
         // re-render the exercise list
         renderChangedRegiment()
@@ -250,7 +250,7 @@ window.addEventListener("load", function() {
         }
         // replace the old exercise by adding the new exercise in its spot
         else if (decision === "swap") {
-            const oldExercise = exercisesInRegiment.findIndex((exercise) => exercise.name === sessionStorage.getItem("exerciseToBeSwapped"))
+            const oldExercise = exercisesInRegiment.findIndex((exercise) => exercise.title === sessionStorage.getItem("exerciseToBeSwapped"))
             exercisesInRegiment.splice(oldExercise, 1, exerciseTransferred)
         }
 

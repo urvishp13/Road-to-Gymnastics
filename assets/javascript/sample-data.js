@@ -38,12 +38,14 @@
 
 let exercises
 
-async function getExercises() {
+async function getDataFromAPI() {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts')
-    const data = await response.json()
-    exercises = data
+    
+    return response.json()
 }
 
-getExercises()
+const data = await getDataFromAPI()
 
-export { exercises }
+console.log(data)
+
+export { data as exercises }
