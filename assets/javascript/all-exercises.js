@@ -1,4 +1,6 @@
 import { exercises } from "./sample-data.js"
+import { customExercises } from "./custom-exercises.js"
+
 // grab the filter buttons from the DOM
 const all = document.querySelector(".btn.all")
 const custom = document.querySelector(".btn.custom")
@@ -8,8 +10,8 @@ let exercisesHTML = '' // HTML to be rendered to DOM
 
 // if incoming request is to add/swap exercise, insert the add/swap icon into the exercisesHTML
 const actionIcon = sessionStorage.getItem("swapORadd")
-const swap = '<a class="swap-exercise-button" data-decision="swap" href="random-regiment.html"><i class="fa-solid fa-right-left"></i></a>'
-const add = '<a class="add-exercise-button" data-decision="add" href="random-regiment.html"><i class="fa-solid fa-plus"></i></a>'
+const swap = '<a class="swap-exercise-button" href="random-regiment.html"><i class="fa-solid fa-right-left" data-decision="swap"></i></a>'
+const add = '<a class="add-exercise-button" href="random-regiment.html"><i class="fa-solid fa-plus" data-decision="add"></i></a>'
 
 const search = document.getElementById("search")
 
@@ -21,21 +23,28 @@ document.addEventListener("click", function (e) {
     // if clickedOn 'all' btn
     if (clickedOn.filter === "all") {
         switchFilterSelection(custom, all)
+        generateExerciseList(exercises)
     }
     // if clickedOn 'custom' btn
     else if (clickedOn.filter === "custom") {
         switchFilterSelection(all, custom)
+        // show CUSTOM exercises only
+        generateExerciseList(customExercises)
     }
     // if clickedOn 'random' btn
     else if (clickedOn.filter === "random") {
         // the random button can be selected regardless of if the 'all' and 'custom' buttons are selected
         random.classList.toggle("selected")
     }
-    // if the user decides to add/swap the exercise OR selects one exercise from the list
-    else if (clickedOn.decision || e.target.offsetParent.dataset) {
+    // if the user decides to add/swap the exercise 
+    else if (clickedOn.decision) {
         // save that exercise
         // exerciseChoosen = e.target.offsetParent // add this exercise to the regiment page
-        sessionStorage.setItem("exerciseAddOrSwap", e.target.offsetParent.textContent.trim())
+        sessionStorage.setItem("exerciseAddOrSwap", e.target.parentElement.previousElementSibling.textContent.trim())
+    }
+    // if the user selects one exercise from the list
+    else if (clickedOn.exercise) {
+        sessionStorage.setItem("exerciseAddOrSwap", e.target.textContent.trim())
     }
 
 })
@@ -55,51 +64,54 @@ exercises.sort(function (curr, next) {
     return currName.localeCompare(nextName)
 })
 
-// add the letter separations to the alphabetically ordered exercise list
-// go through each exercise
-let lastLetter = ''
-exercises.forEach(exercise => {
-    // the HTML for each individual exercise
-    const exerciseHTML = `
-        <div class="exercise" data-add-swap="true">
-            <a class="exercise-name" href="add-swap-exercise.html"><h3>${exercise.title}</h3></a>
-            ${actionIcon === "swap" ? swap : add} <!-- link to regiment page -->
-        </div>
-    `
-    // analyze the exercise's first character
-    const firstChar = exercise.title.charAt(0).toUpperCase()
-    // if its the first time seeing that character
-    if (firstChar != lastLetter) {
-        // AND if already passed the first character of the alphabet ("A")
-        if (firstChar !== "A") {
-            // close the previous div.alpha-grouping
-            exercisesHTML += "</div>"
+function generateExerciseList(list) {
+    // add the letter separations to the alphabetically ordered exercise list
+    // go through each exercise
+    let lastLetter = ''
+    list.forEach(exercise => {
+        // the HTML for each individual exercise
+        const exerciseHTML = `
+            <div class="exercise" data-add-swap="true">
+                <a class="exercise-name" href="add-swap-exercise.html"><h3 data-exercise="true">${exercise.title}</h3></a>
+                ${actionIcon === "swap" ? swap : add} <!-- link to regiment page -->
+            </div>
+        `
+        // analyze the exercise's first character
+        const firstChar = exercise.title.charAt(0).toUpperCase()
+        // if its the first time seeing that character
+        if (firstChar != lastLetter) {
+            // AND if already passed the first character of the alphabet ("A")
+            if (firstChar !== "A") {
+                // close the previous div.alpha-grouping
+                exercisesHTML += "</div>"
+            }
+
+            // add the character to the overall exercisesHTML markup as a header
+            exercisesHTML += `
+                <div class="alpha-grouping">
+                    <h4 class="alpha-header">${firstChar.toUpperCase()}</h4>
+            `
+            // update the lastLetter in the alphabet seen to be the new one
+            lastLetter = firstChar
         }
 
-        // add the character to the overall exercisesHTML markup as a header
-        exercisesHTML += `
-            <div class="alpha-grouping">
-                <h4 class="alpha-header">${firstChar.toUpperCase()}</h4>
-        `
-        // update the lastLetter in the alphabet seen to be the new one
-        lastLetter = firstChar
-    }
+        // add the current exercise to the total exercisesHTML markup
+        exercisesHTML += exerciseHTML
+    })
 
-    // add the current exercise to the total exercisesHTML markup
-    exercisesHTML += exerciseHTML
-})
+    return exercisesHTML
+}
 
 // render the exercises on to the page
 function render() {
-    document.getElementById("all-exercises").innerHTML = exercisesHTML
+    document.getElementById("all-exercises").innerHTML = generateExerciseList(exercises)
     document.querySelectorAll(".exercise")
-        .forEach(exercise => exercise.addEventListener("click", function () {
-            // find the exercise that is meant to be added/swapped with
-            const transfer = exercises.find((exercise) => exercise.name === this.textContent.trim())
+        .forEach(exercise => exercise.addEventListener("click", function () { // if the exercise is clicked
+            // find the exercise that is meant to be added/swapped with from the list of exercises
+            const transfer = exercises.find((exercise) => exercise.title === this.textContent.trim())
             // and store it for transfer
             sessionStorage.setItem("exerciseToTransfer", JSON.stringify(transfer))
-        })
-        )
+        }))
 }
 
 search.addEventListener("input", function (e) {
