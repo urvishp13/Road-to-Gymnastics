@@ -3,6 +3,8 @@ import { collection, doc, setDoc } from "firebase/firestore"
 
 const form = document.getElementById("exercise-form")
 
+const newExercise = document.getElementById("new-exercise")
+
 const newExerciseTitleInput = document.getElementById("new-exercise-title")
 
 const saveBtn = document.getElementById("save-btn")
@@ -28,5 +30,10 @@ form.addEventListener("submit", async function(e) {
     console.error("Error adding document: ", e)
   }
   
+  // write the data to the page
+  document.getElementById("new-exercise-title-placeholder").innerHTML = `<h3 class="exercise-title">${formData.get("new-exercise-title")}</h3>`
+  document.getElementById("new-exercise-desc-placeholder").innerHTML = `<p class="exercise-desc">${formData.get("new-exercise-desc")}</p>`
+
+  // replace the SAVE button with the EDIT button
 })
 
