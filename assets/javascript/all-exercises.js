@@ -1,5 +1,12 @@
 import { exercises } from "./sample-data.js"
-import { customExercises } from "./custom-exercises.js"
+import db from "./firestore.js"
+import { doc, getDoc } from "firebase/firestore"
+
+// add all the custom exercises from the database into the conglomerate list of exercises
+// generate a container for all the custom exercises
+const customExercises = []
+// grab the custom exercises from the database and write them into the container
+
 
 // grab the filter buttons from the DOM
 const all = document.querySelector(".btn.all")

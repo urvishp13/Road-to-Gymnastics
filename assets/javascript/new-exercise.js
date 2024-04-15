@@ -1,38 +1,32 @@
-import { exercises } from './sample-data.js'
-import { customExercises } from './custom-exercises.js'
+import db from "./firestore.js"
+import { collection, doc, setDoc } from "firebase/firestore"
 
 const form = document.getElementById("exercise-form")
 
-const exerciseTitleInput = document.getElementById("new-exercise-title")
-const exerciseDescInput = document.getElementById("new-exercise-desc")
+const newExerciseTitleInput = document.getElementById("new-exercise-title")
 
-form.addEventListener("submit", writeExerciseToPage)
+const saveBtn = document.getElementById("save-btn")
+const editBtn = document.getElementById("edit-btn")
 
-const exercise = document.getElementById("exercise")
+const formData = new FormData(form)
 
-function writeExerciseToPage(e) {
+const customExercisesRef = collection(db, "customExercises")
+  
+// when saving the new exercise's details
+form.addEventListener("submit", async function(e) {
   e.preventDefault()
-  form.innerHTML = `
-    <div class="video"></div>
-    <h3 class="exercise-title">${exerciseTitleInput.value}</h3>
-    <p class="exercise-desc">${exerciseDescInput.value}</p>
-  `
-  addExerciseToData()
-}
-
-function addExerciseToData() {
-    fetch("https://jsonplaceholder.typicode.com/posts", {
-        method: 'POST',
-        body: JSON.stringify({
-            title: exerciseTitleInput.value,
-            body: exerciseDescInput.value
-        }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        }
+  // add the exercise to the database
+  try {
+    await setDoc(doc(customExercisesRef, `${formData.get("new-exercise-title")}`), {
+      title: formData.get("new-exercise-title"),
+      body: formData.get("new-exercise-desc"),
     })
-        .then(response => response.json())
-        .then(newExercise => {
-            customExercises.push(newExercise)
-        })
-}
+    const docRef = doc(db, "customExercises", `${formData.get("new-exercise-title")}`)
+    console.log("Document written with ID: ", docRef.id)
+  }
+  catch (e) {
+    console.error("Error adding document: ", e)
+  }
+  
+})
+

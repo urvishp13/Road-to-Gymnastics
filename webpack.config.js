@@ -2,11 +2,15 @@ const path = require('path');
 
 module.exports = {
   // The entry point file described above
-  entry: './assets/javascript/firestore.js',
+  entry: {
+    database: './assets/javascript/firestore.js',
+    exercises: './assets/javascript/all-exercises.js',
+    newExercise: './assets/javascript/new-exercise.js',
+  },
   // The location of the build folder described above
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     clean: true
   },
   watch: true,
