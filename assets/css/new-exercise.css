@@ -32,7 +32,9 @@
     border-top: 2px solid black;
 }
 
-.btn.save, .btn.add {
+.btn.save, 
+.btn.add,
+.btn.edit {
     width: 80%;
     margin: .67em auto;
     color: var(--clr-text);
@@ -45,4 +47,9 @@
 .btn.save {
     border: none;
     background-color: var(--clr-new);
+}
+
+.btn.edit {
+    border: none;
+    display: none;
 }
