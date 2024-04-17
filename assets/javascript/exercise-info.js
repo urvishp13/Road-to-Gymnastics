@@ -11,8 +11,8 @@ const html = `
     <h3 class="exercise-title">${exerciseWantInfoOn}</h3>
     <p class="exercise-desc">
         ${allExercises.filter(function(exercise) {
-            return exercise.name === exerciseWantInfoOn
-        })[0].desc}
+            return exercise.title === exerciseWantInfoOn
+        })[0].body}
     </p>
 `
 

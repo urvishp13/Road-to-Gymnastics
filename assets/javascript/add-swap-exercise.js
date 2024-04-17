@@ -1,4 +1,4 @@
-import { exercises as allExercises} from "./sample-data.js"
+import { allExercises } from "./sample-data.js"
 
 const add = `
     <a class="btn add" href="random-regiment.html"> <!-- link to regiment page -->
@@ -22,9 +22,9 @@ const html = `
     <div class="video"></div>
     <h3 class="exercise-title">${exerciseAddOrSwap}</h3>
     <p class="exercise-desc">
-        ${allExercises.filter(function(exercise) {
-            return exercise.name === exerciseAddOrSwap
-        })[0].desc}
+        ${allExercises.filter((exercise) => {
+            return exercise.title === exerciseAddOrSwap
+        })[0].body}
     </p>
 `
 
@@ -35,7 +35,7 @@ exerciseInfo.innerHTML = html
 buttonDiv.innerHTML = `${sessionStorage.getItem("swapORadd") === "swap" ? swap : add}`
 
 document.querySelector(".btn").addEventListener("click", function() {
-    sessionStorage.setItem("exerciseToTransfer", JSON.stringify(allExercises.filter((exercise) => exercise.name === exerciseAddOrSwap)[0]))
+    sessionStorage.setItem("exerciseToTransfer", JSON.stringify(allExercises.filter((exercise) => exercise.title === exerciseAddOrSwap)[0]))
 })
 
 sessionStorage.removeItem("exerciseAddOrSwap")
