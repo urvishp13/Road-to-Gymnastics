@@ -1,6 +1,6 @@
-import { exercises } from "./sample-data.js"
-import db from "./firestore.js"
-import { collection, doc, getDocs } from "firebase/firestore"
+import { allExercises, customExercises } from "./sample-data.js"
+// import db from "./firestore.js"
+// import { collection, doc, getDocs } from "firebase/firestore"
 
 // grab the filter buttons from the DOM
 const all = document.querySelector(".btn.all")
@@ -14,8 +14,8 @@ const add = '<a class="add-exercise-button" href="random-regiment.html"><i class
 
 const search = document.getElementById("search")
 
-const customExercises = await getCustomExercisesFromDatabase()
-const allExercises = [...exercises, ...customExercises]
+// const customExercises = await getCustomExercisesFromDatabase()
+// const allExercises = [...exercises, ...customExercises]
 
 // save the exercise adding/swapping with
 document.addEventListener("click", function (e) {
@@ -50,25 +50,25 @@ document.addEventListener("click", function (e) {
 
 })
 
-async function getCustomExercisesFromDatabase() {
-    // add all the custom exercises documents from the database into the conglomerate list of exercises
-    // create an array for all the custom exercises
-    const customExercisesDoc = []
-    // grab all the custom exercises from the database and write them into the container
-    const allCustomExercisesQuerySnapshot = await getDocs(collection(db, "customExercises"))
-    allCustomExercisesQuerySnapshot.forEach(doc => {
-        // add each custom exercise data to the custom exercises array
-        customExercisesDoc.push(doc)
-    })
-    // the exercises in 'customExercisesDoc' array are Firestore documents at this point
-    // extract the data from them and convert them to regular objects for congruency with the data in the 'exercises' array
-    const customExercises = []
-    customExercisesDoc.forEach(customExercise => {
-        customExercises.push(customExercise.data())
-    })
+// async function getCustomExercisesFromDatabase() {
+//     // add all the custom exercises documents from the database into the conglomerate list of exercises
+//     // create an array for all the custom exercises
+//     const customExercisesDoc = []
+//     // grab all the custom exercises from the database and write them into the container
+//     const allCustomExercisesQuerySnapshot = await getDocs(collection(db, "customExercises"))
+//     allCustomExercisesQuerySnapshot.forEach(doc => {
+//         // add each custom exercise data to the custom exercises array
+//         customExercisesDoc.push(doc)
+//     })
+//     // the exercises in 'customExercisesDoc' array are Firestore documents at this point
+//     // extract the data from them and convert them to regular objects for congruency with the data in the 'exercises' array
+//     const customExercises = []
+//     customExercisesDoc.forEach(customExercise => {
+//         customExercises.push(customExercise.data())
+//     })
 
-    return customExercises
-}
+//     return customExercises
+// }
 
 function switchFilterSelection(selectedSoFar, wantSelected) {
     if (selectedSoFar.classList.contains("selected")) {

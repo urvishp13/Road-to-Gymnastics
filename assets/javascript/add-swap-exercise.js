@@ -1,4 +1,4 @@
-import { exercises as allExercises} from "./sample-data.js"
+import { allExercises } from "./sample-data.js"
 
 const add = `
     <a class="btn add" href="random-regiment.html"> <!-- link to regiment page -->

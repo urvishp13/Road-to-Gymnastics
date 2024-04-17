@@ -6,6 +6,7 @@ module.exports = {
     database: './assets/javascript/firestore.js',
     exercises: './assets/javascript/all-exercises.js',
     newExercise: './assets/javascript/new-exercise.js',
+    addSwapExercise: './assets/javascript/add-swap-exercise.js',
   },
   // The location of the build folder described above
   output: {

@@ -1,3 +1,5 @@
+import db from "./firestore.js"
+import { collection, doc, getDocs } from "firebase/firestore"
 // export const exercises = [
 //     {
 //         title: "a Exercise",
@@ -36,12 +38,36 @@
 //     }
 // ]
 
-async function getDataFromAPI() {
+async function getSampleDataFromAPI() {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts')
     
     return response.json()
 }
 
-const exercises = await getDataFromAPI()
+const factoryExercises = await getSampleDataFromAPI()
 
-export { exercises }
+
+async function getCustomExercisesFromDatabase() {
+    // add all the custom exercises documents from the database into the conglomerate list of exercises
+    // create an array for all the custom exercises
+    const customExercisesDoc = []
+    // grab all the custom exercises from the database and write them into the container
+    const allCustomExercisesQuerySnapshot = await getDocs(collection(db, "customExercises"))
+    allCustomExercisesQuerySnapshot.forEach(doc => {
+        // add each custom exercise data to the custom exercises array
+        customExercisesDoc.push(doc)
+    })
+    // the exercises in 'customExercisesDoc' array are Firestore documents at this point
+    // extract the data from them and convert them to regular objects for congruency with the data in the 'exercises' array
+    const customExercises = []
+    customExercisesDoc.forEach(customExercise => {
+        customExercises.push(customExercise.data())
+    })
+
+    return customExercises
+}
+
+const customExercises = await getCustomExercisesFromDatabase()
+const allExercises = [...factoryExercises, ...customExercises]
+
+export { allExercises, customExercises }
