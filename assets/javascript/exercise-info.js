@@ -1,4 +1,4 @@
-import { exercises as allExercises} from "./sample-data.js"
+import { allExercises } from "./sample-data.js"
 
 const exerciseInfo = document.getElementById("exercise-info")
 const exerciseWantInfoOn = sessionStorage.getItem("exerciseWantInfoOn")

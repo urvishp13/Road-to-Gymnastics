@@ -7,6 +7,8 @@ module.exports = {
     exercises: './assets/javascript/all-exercises.js',
     newExercise: './assets/javascript/new-exercise.js',
     addSwapExercise: './assets/javascript/add-swap-exercise.js',
+    randomRegiment: './assets/javascript/random-regiment.js',
+    exerciseInfo: './assets/javascript/exercise-info.js',
   },
   // The location of the build folder described above
   output: {
