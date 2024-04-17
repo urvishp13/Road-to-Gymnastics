@@ -1,19 +1,11 @@
 import { exercises } from "./sample-data.js"
 import db from "./firestore.js"
-import { doc, getDoc } from "firebase/firestore"
-
-// add all the custom exercises from the database into the conglomerate list of exercises
-// generate a container for all the custom exercises
-const customExercises = []
-// grab the custom exercises from the database and write them into the container
-
+import { collection, doc, getDocs } from "firebase/firestore"
 
 // grab the filter buttons from the DOM
 const all = document.querySelector(".btn.all")
 const custom = document.querySelector(".btn.custom")
 const random = document.querySelector(".btn.random")
-
-let exercisesHTML = '' // HTML to be rendered to DOM
 
 // if incoming request is to add/swap exercise, insert the add/swap icon into the exercisesHTML
 const actionIcon = sessionStorage.getItem("swapORadd")
@@ -21,6 +13,9 @@ const swap = '<a class="swap-exercise-button" href="random-regiment.html"><i cla
 const add = '<a class="add-exercise-button" href="random-regiment.html"><i class="fa-solid fa-plus" data-decision="add"></i></a>'
 
 const search = document.getElementById("search")
+
+const customExercises = await getCustomExercisesFromDatabase()
+const allExercises = [...exercises, ...customExercises]
 
 // save the exercise adding/swapping with
 document.addEventListener("click", function (e) {
@@ -30,13 +25,13 @@ document.addEventListener("click", function (e) {
     // if clickedOn 'all' btn
     if (clickedOn.filter === "all") {
         switchFilterSelection(custom, all)
-        generateExerciseList(exercises)
+        render(allExercises)
     }
     // if clickedOn 'custom' btn
     else if (clickedOn.filter === "custom") {
         switchFilterSelection(all, custom)
         // show CUSTOM exercises only
-        generateExerciseList(customExercises)
+        render(customExercises)
     }
     // if clickedOn 'random' btn
     else if (clickedOn.filter === "random") {
@@ -46,7 +41,6 @@ document.addEventListener("click", function (e) {
     // if the user decides to add/swap the exercise 
     else if (clickedOn.decision) {
         // save that exercise
-        // exerciseChoosen = e.target.offsetParent // add this exercise to the regiment page
         sessionStorage.setItem("exerciseAddOrSwap", e.target.parentElement.previousElementSibling.textContent.trim())
     }
     // if the user selects one exercise from the list
@@ -56,6 +50,26 @@ document.addEventListener("click", function (e) {
 
 })
 
+async function getCustomExercisesFromDatabase() {
+    // add all the custom exercises documents from the database into the conglomerate list of exercises
+    // create an array for all the custom exercises
+    const customExercisesDoc = []
+    // grab all the custom exercises from the database and write them into the container
+    const allCustomExercisesQuerySnapshot = await getDocs(collection(db, "customExercises"))
+    allCustomExercisesQuerySnapshot.forEach(doc => {
+        // add each custom exercise data to the custom exercises array
+        customExercisesDoc.push(doc)
+    })
+    // the exercises in 'customExercisesDoc' array are Firestore documents at this point
+    // extract the data from them and convert them to regular objects for congruency with the data in the 'exercises' array
+    const customExercises = []
+    customExercisesDoc.forEach(customExercise => {
+        customExercises.push(customExercise.data())
+    })
+
+    return customExercises
+}
+
 function switchFilterSelection(selectedSoFar, wantSelected) {
     if (selectedSoFar.classList.contains("selected")) {
         selectedSoFar.classList.remove("selected")
@@ -64,17 +78,20 @@ function switchFilterSelection(selectedSoFar, wantSelected) {
 }
 
 // sort the exercises in alphabetical order
-exercises.sort(function (curr, next) {
-    const currName = curr.title // current exercise name
-    const nextName = next.title // next exercise name
+function sortExercisesList(exercisesList) {
+    exercisesList.sort(function (curr, next) {
+        const currName = curr.title // current exercise name
+        const nextName = next.title // next exercise name
 
-    return currName.localeCompare(nextName)
-})
+        return currName.localeCompare(nextName)
+    })
+}
 
 function generateExerciseList(list) {
     // add the letter separations to the alphabetically ordered exercise list
     // go through each exercise
     let lastLetter = ''
+    let exercisesHTML = '' // HTML to be rendered to DOM
     list.forEach(exercise => {
         // the HTML for each individual exercise
         const exerciseHTML = `
@@ -110,12 +127,13 @@ function generateExerciseList(list) {
 }
 
 // render the exercises on to the page
-function render() {
-    document.getElementById("all-exercises").innerHTML = generateExerciseList(exercises)
+function render(exercisesList) {
+    sortExercisesList(exercisesList)
+    document.getElementById("exercises").innerHTML = generateExerciseList(exercisesList)
     document.querySelectorAll(".exercise")
         .forEach(exercise => exercise.addEventListener("click", function () { // if the exercise is clicked
             // find the exercise that is meant to be added/swapped with from the list of exercises
-            const transfer = exercises.find((exercise) => exercise.title === this.textContent.trim())
+            const transfer = exercisesList.find((exercise) => exercise.title === this.textContent.trim())
             // and store it for transfer
             sessionStorage.setItem("exerciseToTransfer", JSON.stringify(transfer))
         }))
@@ -141,4 +159,4 @@ search.addEventListener("input", function (e) {
         })
 })
 
-render()
+render(allExercises)
