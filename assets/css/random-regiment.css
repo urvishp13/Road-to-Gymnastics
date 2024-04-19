@@ -113,6 +113,10 @@ main {
 
 /* ///////////// START WORKOUT PROMPT ///////// */
 
+.wrapper-btns {
+    position: unset;
+}
+
 .start-workout-prompt {
     position: relative;
     font-size: 1.25rem;
