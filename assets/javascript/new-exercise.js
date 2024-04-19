@@ -93,3 +93,11 @@ editBtn.addEventListener("click", async function (e) {
     exerciseDescInput.value = exerciseSnapshot.data().body // populate the desc textarea with the previous written desc
 })
 
+// delete the current exercise when the DELETE button clicked
+deleteBtn.addEventListener("click", async function() {
+    const exerciseTitle = exerciseTitlePlaceholder.textContent
+    await deleteDoc(doc(db, "customExercises", `${exerciseTitle}`))
+    console.log("exercise deleted")
+    window.location.href = "all-exercises.html"
+}) 
+

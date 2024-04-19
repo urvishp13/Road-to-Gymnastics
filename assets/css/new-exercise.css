@@ -34,7 +34,7 @@
 
 .btns-grid {
     display: none;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
     grid-template-areas: 
         "edit delete"
