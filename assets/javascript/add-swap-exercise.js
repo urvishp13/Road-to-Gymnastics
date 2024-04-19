@@ -37,5 +37,3 @@ buttonDiv.innerHTML = `${sessionStorage.getItem("swapORadd") === "swap" ? swap :
 document.querySelector(".btn").addEventListener("click", function() {
     sessionStorage.setItem("exerciseToTransfer", JSON.stringify(allExercises.filter((exercise) => exercise.title === exerciseAddOrSwap)[0]))
 })
-
-sessionStorage.removeItem("exerciseAddOrSwap")

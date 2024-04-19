@@ -5,31 +5,29 @@
 }
 
 html {
-    height: 100%;
+    /* height: 100%; */
 }
 
 body {
     font-family: 'Open Sans', sans-serif;
 }
 
-main {
-    min-height: 100%;
-}
+/* ///////////// NAV ARROW /////////////////// */
 
-.container {
-    min-height: inherit;
+.fa-arrow-left {
+    /* margin-left: 1em; */
 }
 
 /* /////////////// EXERCISE INFO ///////////// */
 
 .exercise-info {
-    height: inherit;
+    /* height: 100vh; */
 }
 
 .video {
     position: relative;
     width: 100vw;
-    height: 35%;
+    height: 15em;
     left: calc(-50vw + 50%);
     background-color: lightgrey; /* placeholder for video */
     z-index: -1;
