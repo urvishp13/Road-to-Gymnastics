@@ -2,10 +2,14 @@
     box-sizing: border-box;
 }
 
+.container {
+    
+}
+
 /* /////////// EXERCISE DESC /////////////////////// */
 
 .exercise-desc {
-    height: calc(100vh - 35% - 1em - .5em - 30px);
+    height: auto;
     overflow-y: auto;
 }
 
@@ -13,9 +17,12 @@
 
 .btn-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 15vh;
+    /* height: 15vh; */
+    gap: 1em;
+    padding: 1.5em 0;
     border-top: 2px solid black;
 }
 
@@ -30,4 +37,9 @@
 
 .btn.swap {
     background-color: var(--swap);
+}
+
+.btn.delete {
+    background-color: var(--delete);
+    color: white;
 }

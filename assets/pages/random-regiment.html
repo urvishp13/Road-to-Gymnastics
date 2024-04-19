@@ -32,18 +32,20 @@
                 <i class="fa-solid fa-play"></i> Start Workout
             </button>
         </div>
-        <div id="start-workout-prompt" class="start-workout-prompt">
-            <i class="fa-solid fa-play"></i> Start Workout <i class="fa-solid fa-xmark" data-click="close prompt"></i>
-            <div class="workout-type-options">
-                <a class="btn" data-workout-type="supersets" href="workout.html">SUPERSETS</a>
-                <a class="btn" data-workout-type="straight sets" href="workout.html">STRAIGHT SETS</a>
+        <div class="wrapper-btns">
+            <div id="start-workout-prompt" class="start-workout-prompt">
+                <i class="fa-solid fa-play"></i> Start Workout <i class="fa-solid fa-xmark" data-click="close prompt"></i>
+                <div class="workout-type-options">
+                    <a class="btn" data-workout-type="supersets" href="workout.html">SUPERSETS</a>
+                    <a class="btn" data-workout-type="straight sets" href="workout.html">STRAIGHT SETS</a>
+                </div>
             </div>
         </div>
     </main>
 
     <div id="overlay" class="overlay"></div>
 
-    <script src="../javascript/random-regiment.js" type="module"></script>
+    <script src="../../dist/randomRegiment.bundle.js" type="module"></script>
 </body>
 
 </html>

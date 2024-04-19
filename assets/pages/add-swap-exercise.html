@@ -21,13 +21,16 @@
 <body>
     <main>
         <div class="container">
-            <a href="all-exercises.html"><i class="fa-solid fa-arrow-left"></i></a> <!-- link to the 'All exercises' page -->
+            <a id="back-arrow" href="all-exercises.html"><i class="fa-solid fa-arrow-left"></i></a> <!-- link to the 'All exercises' page -->
             <div id="exercise-info" class="exercise-info">
                 <!-- dynamically insert exercise info here -->
             </div>
 
-            <div id="btn-container" class="btn-container override-container">
-                <!-- dynamically render button based on if this is an 'Add Exercise' request or 'Swap Exercise' request -->
+            <div class="wrapper-btns">
+                <div id="btn-container" class="btn-container">
+                    <!-- dynamically render button based on if this is an 'Add Exercise' request or 'Swap Exercise' request -->
+                    <!-- dynamically render 'Delete' button based on if exercise is a CUSTOM exercise or not -->
+                </div>
             </div>
         </div>
     </main>

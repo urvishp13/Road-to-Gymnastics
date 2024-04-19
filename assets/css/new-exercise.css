@@ -21,35 +21,54 @@
 }
 
 .new-exercise-desc {
-    height: 90%;
+    height: 10em;
 }
 
-/* //////////// ADD/SAVE BUTTONS ////////////////// */
+/* //////////// BUTTONS ////////////////// */
 
 .btn-container {
-    padding: 1em 0;
+    padding: 1.5em 0;
     height: auto;
     border-top: 2px solid black;
 }
 
+.btns-grid {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas: 
+        "edit delete"
+        "add  add";
+    gap: 1em;
+    width: 80%;
+    margin: 0 auto;
+}
+
 .btn.save, 
 .btn.add,
-.btn.edit {
-    width: 80%;
-    margin: .67em auto;
+.btn.edit,
+.btn.delete {
+    width: 100%;
     color: var(--clr-text);
 }
 
 .btn.add {
+    grid-area: add;
     background-color: var(--add);
 }
 
 .btn.save {
+    width: 80%;
+    margin: 0 auto;
     border: none;
     background-color: var(--clr-new);
 }
 
 .btn.edit {
     border: none;
-    display: none;
+}
+
+.btn.delete {
+    background-color: var(--delete);
+    color: white;
 }

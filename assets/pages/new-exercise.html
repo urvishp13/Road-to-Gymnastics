@@ -45,6 +45,7 @@
               name="new-exercise-title"
               type="text"
               placeholder="Name of exercise..."
+              required
             />
           </div>
 
@@ -58,23 +59,31 @@
               class="exercise-desc new-exercise-desc"
               name="new-exercise-desc"
               placeholder="Description of exercise..."
+              required
             ></textarea>
           </div>
 
           <!-- buttons -->
-          <div class="btn-container override-container">
-            <button id="save-btn" class="btn save">
-              <span><i class="fa-solid fa-floppy-disk"></i> Save</span>
-            </button>
-            <button id="edit-btn" class="btn edit">
-                <span><i class="fa-solid fa-pen-to-square"></i> Edit</span>
-            </button>
-            <a class="btn add" href="#">
-              <!-- link to regiment page -->
-              <span
-                ><i class="fa-solid fa-circle-plus"></i> Add to Workout</span
-              >
-            </a>
+          <div class="wrapper-btns">
+            <div class="btn-container">
+              <button type="submit" id="save-btn" class="btn save">
+                <span><i class="fa-solid fa-floppy-disk"></i> Save</span>
+              </button>
+              <div id="btns-grid" class="btns-grid">
+                <button type="button" id="edit-btn" class="btn edit">
+                    <span><i class="fa-solid fa-pen-to-square"></i> Edit</span>
+                </button>
+                <a id="delete-btn" class="btn delete">
+                  <span><i class="fa-solid fa-trash-can"></i> Delete</span>
+                </a>
+                <a id="add-btn" class="btn add" href="random-regiment.html">
+                  <!-- link to regiment page -->
+                  <span
+                    ><i class="fa-solid fa-circle-plus"></i> Add to Workout</span
+                  >
+                </a>
+              </div>
+            </div>
           </div>
         </form>
 

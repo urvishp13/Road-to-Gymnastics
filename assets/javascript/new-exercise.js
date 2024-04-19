@@ -1,6 +1,9 @@
 import db from "./firestore.js"
 import { collection, deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 
+const form = document.getElementById("exercise-form")
+const btnsGrid = document.getElementById("btns-grid")
+
 const exerciseTitleInput = document.getElementById("new-exercise-title")
 const exerciseDescInput = document.getElementById("new-exercise-desc")
 
@@ -9,12 +12,14 @@ const exerciseDescPlaceholder = document.getElementById("new-exercise-desc-place
 
 const saveBtn = document.getElementById("save-btn")
 const editBtn = document.getElementById("edit-btn")
+const addBtn = document.getElementById("add-btn")
+const deleteBtn = document.getElementById("delete-btn")
 
 const customExercisesRef = collection(db, "customExercises")
 
 let prevExerciseTitle
 // when saving the new exercise's details
-saveBtn.addEventListener("click", async function (e) {
+form.addEventListener("submit", async function (e) {
     e.preventDefault()
 
     const exerciseTitle = exerciseTitleInput.value
@@ -58,9 +63,9 @@ saveBtn.addEventListener("click", async function (e) {
     exerciseTitlePlaceholder.innerHTML = `<h3 class="exercise-title">${exerciseTitle}</h3>`
     exerciseDescPlaceholder.innerHTML = `<p class="exercise-desc">${exerciseDesc}</p>`
 
-    // replace the SAVE button with the EDIT button
+    // replace the SAVE button with the EDIT, DELETE, and ADD buttons grid
     saveBtn.style.display = "none"
-    editBtn.style.display = "block"
+    btnsGrid.style.display = "grid"
 
     // keep track of this exercise title in case if changes in it are made
     prevExerciseTitle = exerciseTitle
@@ -69,8 +74,8 @@ saveBtn.addEventListener("click", async function (e) {
 // when editing the custom exercise's details
 editBtn.addEventListener("click", async function (e) {
     e.preventDefault()
-    // re-display the SAVE button by replacing the EDIT button with it
-    editBtn.style.display = "none"
+    // re-display the SAVE button by replacing the EDIT, DELETE, and ADD buttons grid with it
+    btnsGrid.style.display = "none"
     saveBtn.style.display = "block"
 
     const exerciseTitle = exerciseTitlePlaceholder.textContent
@@ -87,4 +92,12 @@ editBtn.addEventListener("click", async function (e) {
     exerciseTitleInput.value = exerciseSnapshot.data().title // populate the title input with the previous written title
     exerciseDescInput.value = exerciseSnapshot.data().body // populate the desc textarea with the previous written desc
 })
+
+// delete the current exercise when the DELETE button clicked
+deleteBtn.addEventListener("click", async function() {
+    const exerciseTitle = exerciseTitlePlaceholder.textContent
+    await deleteDoc(doc(db, "customExercises", `${exerciseTitle}`))
+    console.log("exercise deleted")
+    window.location.href = "all-exercises.html"
+}) 
 

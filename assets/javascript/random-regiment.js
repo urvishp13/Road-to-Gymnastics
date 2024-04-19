@@ -1,4 +1,4 @@
-import { exercises as allExercises} from "./sample-data.js"
+import { allExercises } from "./sample-data.js"
 
 // grab the exercises list section from DOM
 const exercisesList = document.getElementById("exercises-list")
