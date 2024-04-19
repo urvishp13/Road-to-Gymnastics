@@ -114,13 +114,16 @@ a.new-exercise {
 }
 
 .exercise-name {
-    width: 100%;
+    width: 80%;
     text-decoration: none;
     color: var(--clr-text);
 }
 
 .exercise-name > h3 {
     margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .add-exercise-button > i,
