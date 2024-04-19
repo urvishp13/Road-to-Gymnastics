@@ -2,6 +2,7 @@ import db from "./firestore.js"
 import { collection, deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 
 const form = document.getElementById("exercise-form")
+const btnsGrid = document.getElementById("btns-grid")
 
 const exerciseTitleInput = document.getElementById("new-exercise-title")
 const exerciseDescInput = document.getElementById("new-exercise-desc")
@@ -12,6 +13,7 @@ const exerciseDescPlaceholder = document.getElementById("new-exercise-desc-place
 const saveBtn = document.getElementById("save-btn")
 const editBtn = document.getElementById("edit-btn")
 const addBtn = document.getElementById("add-btn")
+const deleteBtn = document.getElementById("delete-btn")
 
 const customExercisesRef = collection(db, "customExercises")
 
@@ -61,10 +63,9 @@ form.addEventListener("submit", async function (e) {
     exerciseTitlePlaceholder.innerHTML = `<h3 class="exercise-title">${exerciseTitle}</h3>`
     exerciseDescPlaceholder.innerHTML = `<p class="exercise-desc">${exerciseDesc}</p>`
 
-    // replace the SAVE button with the EDIT and ADD button
+    // replace the SAVE button with the EDIT, DELETE, and ADD buttons grid
     saveBtn.style.display = "none"
-    editBtn.style.display = "block"
-    addBtn.style.display = "block"
+    btnsGrid.style.display = "grid"
 
     // keep track of this exercise title in case if changes in it are made
     prevExerciseTitle = exerciseTitle
@@ -73,9 +74,8 @@ form.addEventListener("submit", async function (e) {
 // when editing the custom exercise's details
 editBtn.addEventListener("click", async function (e) {
     e.preventDefault()
-    // re-display the SAVE button by replacing the EDIT and ADD button with it
-    editBtn.style.display = "none"
-    addBtn.style.display = "none"
+    // re-display the SAVE button by replacing the EDIT, DELETE, and ADD buttons grid with it
+    btnsGrid.style.display = "none"
     saveBtn.style.display = "block"
 
     const exerciseTitle = exerciseTitlePlaceholder.textContent
