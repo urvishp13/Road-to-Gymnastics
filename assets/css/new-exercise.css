@@ -21,7 +21,7 @@
 }
 
 .new-exercise-desc {
-    height: 90%;
+    height: 10em;
 }
 
 /* //////////// ADD/SAVE BUTTONS ////////////////// */
@@ -42,6 +42,7 @@
 
 .btn.add {
     background-color: var(--add);
+    display: none;
 }
 
 .btn.save {

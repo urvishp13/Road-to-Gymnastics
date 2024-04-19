@@ -1,6 +1,8 @@
 import db from "./firestore.js"
 import { collection, deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 
+const form = document.getElementById("exercise-form")
+
 const exerciseTitleInput = document.getElementById("new-exercise-title")
 const exerciseDescInput = document.getElementById("new-exercise-desc")
 
@@ -9,12 +11,13 @@ const exerciseDescPlaceholder = document.getElementById("new-exercise-desc-place
 
 const saveBtn = document.getElementById("save-btn")
 const editBtn = document.getElementById("edit-btn")
+const addBtn = document.getElementById("add-btn")
 
 const customExercisesRef = collection(db, "customExercises")
 
 let prevExerciseTitle
 // when saving the new exercise's details
-saveBtn.addEventListener("click", async function (e) {
+form.addEventListener("submit", async function (e) {
     e.preventDefault()
 
     const exerciseTitle = exerciseTitleInput.value
@@ -58,9 +61,10 @@ saveBtn.addEventListener("click", async function (e) {
     exerciseTitlePlaceholder.innerHTML = `<h3 class="exercise-title">${exerciseTitle}</h3>`
     exerciseDescPlaceholder.innerHTML = `<p class="exercise-desc">${exerciseDesc}</p>`
 
-    // replace the SAVE button with the EDIT button
+    // replace the SAVE button with the EDIT and ADD button
     saveBtn.style.display = "none"
     editBtn.style.display = "block"
+    addBtn.style.display = "block"
 
     // keep track of this exercise title in case if changes in it are made
     prevExerciseTitle = exerciseTitle
@@ -69,8 +73,9 @@ saveBtn.addEventListener("click", async function (e) {
 // when editing the custom exercise's details
 editBtn.addEventListener("click", async function (e) {
     e.preventDefault()
-    // re-display the SAVE button by replacing the EDIT button with it
+    // re-display the SAVE button by replacing the EDIT and ADD button with it
     editBtn.style.display = "none"
+    addBtn.style.display = "none"
     saveBtn.style.display = "block"
 
     const exerciseTitle = exerciseTitlePlaceholder.textContent

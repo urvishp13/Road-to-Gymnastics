@@ -50,26 +50,6 @@ document.addEventListener("click", function (e) {
 
 })
 
-// async function getCustomExercisesFromDatabase() {
-//     // add all the custom exercises documents from the database into the conglomerate list of exercises
-//     // create an array for all the custom exercises
-//     const customExercisesDoc = []
-//     // grab all the custom exercises from the database and write them into the container
-//     const allCustomExercisesQuerySnapshot = await getDocs(collection(db, "customExercises"))
-//     allCustomExercisesQuerySnapshot.forEach(doc => {
-//         // add each custom exercise data to the custom exercises array
-//         customExercisesDoc.push(doc)
-//     })
-//     // the exercises in 'customExercisesDoc' array are Firestore documents at this point
-//     // extract the data from them and convert them to regular objects for congruency with the data in the 'exercises' array
-//     const customExercises = []
-//     customExercisesDoc.forEach(customExercise => {
-//         customExercises.push(customExercise.data())
-//     })
-
-//     return customExercises
-// }
-
 function switchFilterSelection(selectedSoFar, wantSelected) {
     if (selectedSoFar.classList.contains("selected")) {
         selectedSoFar.classList.remove("selected")

@@ -15,16 +15,6 @@
 
 /* /////////// PUTTING EXERCISE INTO WORKOUT BUTTON /////////////// */
 
-.wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: 440px;
-    margin: 0 auto;
-}
-
 .btn-container {
     display: flex;
     justify-content: center;
