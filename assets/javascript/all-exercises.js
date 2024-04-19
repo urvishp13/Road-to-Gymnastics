@@ -25,13 +25,13 @@ document.addEventListener("click", function (e) {
     // if clickedOn 'all' btn
     if (clickedOn.filter === "all") {
         switchFilterSelection(custom, all)
-        render(allExercises)
+        render(allExercises, false)
     }
     // if clickedOn 'custom' btn
     else if (clickedOn.filter === "custom") {
         switchFilterSelection(all, custom)
         // show CUSTOM exercises only
-        render(customExercises)
+        render(customExercises, true)
     }
     // if clickedOn 'random' btn
     else if (clickedOn.filter === "random") {
@@ -67,7 +67,7 @@ function sortExercisesList(exercisesList) {
     })
 }
 
-function generateExerciseList(list) {
+function generateExerciseList(list, isCustom) {
     // add the letter separations to the alphabetically ordered exercise list
     // go through each exercise
     let lastLetter = ''
@@ -76,7 +76,7 @@ function generateExerciseList(list) {
         // the HTML for each individual exercise
         const exerciseHTML = `
             <div class="exercise" data-add-swap="true">
-                <a class="exercise-name" href="add-swap-exercise.html"><h3 data-exercise="true">${exercise.title}</h3></a>
+                <a class="exercise-name" href="add-swap-exercise.html" data-custom=${isCustom}><h3 data-exercise="true">${exercise.title}</h3></a>
                 ${actionIcon === "swap" ? swap : add} <!-- link to regiment page -->
             </div>
         `
@@ -107,15 +107,19 @@ function generateExerciseList(list) {
 }
 
 // render the exercises on to the page
-function render(exercisesList) {
+function render(exercisesList, isCustom) {
     sortExercisesList(exercisesList)
-    document.getElementById("exercises").innerHTML = generateExerciseList(exercisesList)
+    document.getElementById("exercises").innerHTML = generateExerciseList(exercisesList, isCustom)
     document.querySelectorAll(".exercise")
         .forEach(exercise => exercise.addEventListener("click", function () { // if the exercise is clicked
             // find the exercise that is meant to be added/swapped with from the list of exercises
             const transfer = exercisesList.find((exercise) => exercise.title === this.textContent.trim())
             // and store it for transfer
             sessionStorage.setItem("exerciseToTransfer", JSON.stringify(transfer))
+            // store whether the exercise is a custom exercise
+            if (isCustom) {
+                sessionStorage.setItem("isCustom", isCustom)
+            }
         }))
 }
 
