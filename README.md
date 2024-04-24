@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Road to Gymnastics](https://road-to-gymnastics.netlify.app/assets/pages/workout-startup-page1.html)
 
 ## My process
 
@@ -59,6 +59,8 @@ HTML, CSS, JavaScript, Firebase
 - [How to make a search bar](https://www.youtube.com/watch?v=TlP5WIxVirU&t=319s) - This video taught me the basics on how to make a search bar.
 
 - [Writing to DOM while fetching data](https://stackoverflow.com/questions/13364613/how-to-know-if-window-load-event-was-fired-already) - This helped me solve the problem of "load" events while fetching data asynchronously.
+
+- [How to Host Bundled Site on Netlify](https://www.youtube.com/watch?v=3HUI1EQS9sA) - This provided me with some clues on how to go about hosting this site to Netlify. Needed an `index.html` file in the root of the directory and made that redirect to the start-up page for the app—a work-around to get the app deployed.
 
 ## Author
 
