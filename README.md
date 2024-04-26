@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Road to Gymnastics](https://road-to-gymnastics.netlify.app/assets/pages/workout-startup-page1.html)
+- Live Site URL: [Road to Gymnastics](https://road-to-gymnastics.netlify.app/)
 
 ## My process
 
