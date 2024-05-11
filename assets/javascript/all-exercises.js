@@ -1,6 +1,4 @@
 import { allExercises, customExercises } from "./sample-data.js"
-// import db from "./firestore.js"
-// import { collection, doc, getDocs } from "firebase/firestore"
 
 // grab the filter buttons from the DOM
 const all = document.querySelector(".btn.all")
@@ -14,8 +12,11 @@ const add = '<a class="add-exercise-button" href="random-regiment.html"><i class
 
 const search = document.getElementById("search")
 
-// const customExercises = await getCustomExercisesFromDatabase()
-// const allExercises = [...exercises, ...customExercises]
+const url = window.location.href
+const inputUrl = new URL(url)
+
+let isSearchActive
+let query
 
 // save the exercise adding/swapping with
 document.addEventListener("click", function (e) {
@@ -26,12 +27,14 @@ document.addEventListener("click", function (e) {
     if (clickedOn.filter === "all") {
         switchFilterSelection(custom, all)
         render(allExercises, false)
+        renderQueriedExercises(isSearchActive, query)
     }
     // if clickedOn 'custom' btn
     else if (clickedOn.filter === "custom") {
         switchFilterSelection(all, custom)
         // show CUSTOM exercises only
         render(customExercises, true)
+        renderQueriedExercises(isSearchActive, query)
     }
     // if clickedOn 'random' btn
     else if (clickedOn.filter === "random") {
@@ -75,7 +78,7 @@ function generateExerciseList(list, isCustom) {
     list.forEach(exercise => {
         // the HTML for each individual exercise
         const exerciseHTML = `
-            <div class="exercise" data-add-swap="true">
+            <div class="exercise ${isCustom ? "custom" : ''}" data-add-swap="true">
                 <a class="exercise-name" href="add-swap-exercise.html" data-custom=${isCustom}><h3 data-exercise="true">${exercise.title}</h3></a>
                 ${actionIcon === "swap" ? swap : add} <!-- link to regiment page -->
             </div>
@@ -101,9 +104,20 @@ function generateExerciseList(list, isCustom) {
 
         // add the current exercise to the total exercisesHTML markup
         exercisesHTML += exerciseHTML
+
     })
 
     return exercisesHTML
+}
+
+function removeLetterHeaders() {
+    document.querySelectorAll(".alpha-header")
+        .forEach(header => header.classList.add("hide"))
+}
+
+function showLetterHeaders() {
+    document.querySelectorAll(".alpha-header")
+        .forEach(header => header.classList.remove("hide"))
 }
 
 // render the exercises on to the page
@@ -123,24 +137,59 @@ function render(exercisesList, isCustom) {
         }))
 }
 
-search.addEventListener("input", function (e) {
-    // get the typed query
-    const value = e.target.value.toLowerCase()
+function renderQueriedExercises(isSearchActive, query) {
+    if (isSearchActive) {
+        removeLetterHeaders() 
+    }
+    else {
+        showLetterHeaders()
+    }
+    filterQueriedExercises(query)
+}
 
-    // if ANY query exists
-    value
-        // remove the alphabet letter headings from the list of exercise
-        ? document.querySelectorAll(".alpha-header")
-            .forEach(header => header.classList.add("hide"))
-        // else, if no query, put the alphabet letter headings back into the list
-        : document.querySelectorAll(".alpha-header")
-            .forEach(header => header.classList.remove("hide"))
+// only make the exercises that match the search results appear
+function filterQueriedExercises(query) {
+    // if the search query is cleared
+    if (!query) {
+        document.querySelectorAll(".exercise")
+            .forEach(exerciseEl => {
+                exerciseEl.classList.remove("hide")
+            })
+        return
+    }
 
+    // if adding/removing letters to the search query one letter at a time
     document.querySelectorAll(".exercise")
         .forEach(exerciseEl => {
-            const isVisible = exerciseEl.textContent.trim().toLowerCase().includes(value)
+            const isVisible = exerciseEl.textContent.trim().toLowerCase().includes(query)
             exerciseEl.classList.toggle("hide", !isVisible)
         })
+}
+
+search.addEventListener("input", function (e) {
+    // clear the previous "search" query
+    inputUrl.searchParams.delete("search")
+
+    // get the typed new (updated) query
+    query = e.target.value.toLowerCase()
+
+    // set the URL with the new search query
+    inputUrl.searchParams.append("search", query)
+    window.history.replaceState(null, "", inputUrl.href)
+
+    // if ANY query exists
+    if (inputUrl.search.split("=")[1]) {
+        isSearchActive = true
+    }
+    // else, if no query, put the alphabet letter headings back into the list
+    else { 
+        isSearchActive = false
+    }
+    renderQueriedExercises(isSearchActive, query)
 })
+
+
+    // if the query is cleared through double clicking
+        // make all the exercises in the list re-appear
 
 render(allExercises)
